@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+
+.space-grotesk-400 {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme {
+  --color-primary: #13ec5b;
+  --color-background-dark: #102216;
+  --color-spy-green: #39FF14;
+  --color-spy-red: #E53E3E;
+  --color-spy-amber: #FFBF00;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-pixel: 'VT323', monospace;
+}
+
+body {
+  @apply bg-background-dark font-sans text-gray-200;
+}

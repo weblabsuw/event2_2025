@@ -1,0 +1,2109 @@
+[
+  {
+    "weapon_type": "Bio-Electric Stunner",
+    "clearance": [
+      "223-51-2786",
+      "333-33-3333",
+      "901-10-9876",
+      "364-89-5977",
+      "789-32-1098"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "900-10-1230",
+      "400-86-7813",
+      "100-20-3040",
+      "222-22-2222"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "649-34-6953",
+      "678-43-2109",
+      "500-60-7080",
+      "111-11-1111",
+      "222-22-2222"
+    ]
+  },
+  {
+    "weapon_type": "Laser Carbine",
+    "clearance": [
+      "123-98-7654",
+      "690-88-3661",
+      "666-66-6666",
+      "440-27-9930"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "789-32-1098",
+      "666-66-6666",
+      "222-22-2222",
+      "111-11-1111",
+      "865-13-5310"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "861-78-7984",
+      "900-10-1230",
+      "888-88-8888"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "888-88-8888",
+      "777-77-7777"
+    ]
+  },
+  {
+    "weapon_type": "Quantum Disintegrator",
+    "clearance": [
+      "100-20-3040",
+      "742-75-4744"
+    ]
+  },
+  {
+    "weapon_type": "EMP Grenade",
+    "clearance": [
+      "222-22-2222",
+      "999-99-9999"
+    ]
+  },
+  {
+    "weapon_type": "Temporal Displacer",
+    "clearance": [
+      "200-30-4050",
+      "333-33-3333",
+      "386-99-1210"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "700-80-9010",
+      "333-33-3333",
+      "400-50-6070",
+      "456-65-4321"
+    ]
+  },
+  {
+    "weapon_type": "EMP Grenade",
+    "clearance": [
+      "800-90-0120",
+      "222-22-2222",
+      "567-54-3210",
+      "900-10-1230",
+      "798-64-8362"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "659-65-8789",
+      "290-92-8179"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "998-43-6738",
+      "222-22-2222",
+      "214-10-5072",
+      "777-77-7777",
+      "666-66-6666"
+    ]
+  },
+  {
+    "weapon_type": "Particle Beam Pistol",
+    "clearance": [
+      "789-32-1098",
+      "172-29-3047"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "123-98-7654",
+      "840-22-6779",
+      "668-21-7955",
+      "444-44-4444",
+      "333-33-3333"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "100-20-3040",
+      "854-74-4234",
+      "901-10-9876"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "325-78-9344",
+      "111-11-1111",
+      "234-87-6543",
+      "901-10-9876",
+      "868-22-3811"
+    ]
+  },
+  {
+    "weapon_type": "Temporal Displacer",
+    "clearance": [
+      "500-60-7080",
+      "777-77-7777",
+      "900-10-1230"
+    ]
+  },
+  {
+    "weapon_type": "Particle Beam Pistol",
+    "clearance": [
+      "900-10-1230",
+      "300-40-5060",
+      "800-90-0120",
+      "456-65-4321"
+    ]
+  },
+  {
+    "weapon_type": "Plasma Rifle",
+    "clearance": [
+      "900-10-1230",
+      "456-65-4321",
+      "495-42-9547"
+    ]
+  },
+  {
+    "weapon_type": "Temporal Displacer",
+    "clearance": [
+      "300-40-5060",
+      "796-80-1957",
+      "887-37-6226"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "888-88-8888",
+      "500-60-7080",
+      "900-10-1230"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "222-22-2222",
+      "111-11-1111",
+      "123-98-7654"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "800-90-0120",
+      "541-20-5864",
+      "444-44-4444",
+      "600-70-8090",
+      "500-60-7080"
+    ]
+  },
+  {
+    "weapon_type": "Holographic Decoy Projector",
+    "clearance": [
+      "903-38-4849",
+      "500-60-7080",
+      "400-50-6070",
+      "234-87-6543",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "567-54-3210",
+      "890-21-0987"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "900-10-1230",
+      "180-73-6950",
+      "879-54-6424",
+      "456-65-4321",
+      "666-66-6666"
+    ]
+  },
+  {
+    "weapon_type": "Particle Beam Pistol",
+    "clearance": [
+      "678-43-2109",
+      "300-40-5060"
+    ]
+  },
+  {
+    "weapon_type": "Particle Beam Pistol",
+    "clearance": [
+      "111-11-1111",
+      "999-99-9999",
+      "888-88-8888",
+      "710-95-9094"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "890-21-0987",
+      "900-10-1230"
+    ]
+  },
+  {
+    "weapon_type": "Quantum Disintegrator",
+    "clearance": [
+      "376-90-7014",
+      "296-34-8016",
+      "123-98-7654",
+      "457-62-1502",
+      "900-10-1230"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "700-80-9010",
+      "905-49-6410",
+      "111-11-1111"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "100-20-3040",
+      "444-44-4444",
+      "882-89-3958"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "567-54-3210",
+      "222-22-2222"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "700-80-9010",
+      "198-89-8340"
+    ]
+  },
+  {
+    "weapon_type": "Phase Shifter",
+    "clearance": [
+      "400-50-6070",
+      "254-39-5202"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "210-86-5080",
+      "100-20-3040",
+      "700-80-9010",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Gravity Wave Emitter",
+    "clearance": [
+      "111-11-1111",
+      "888-88-8888",
+      "890-21-0987"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "900-10-1230",
+      "333-33-3333",
+      "400-50-6070",
+      "234-87-6543",
+      "575-41-1931"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "333-33-3333",
+      "777-77-7777"
+    ]
+  },
+  {
+    "weapon_type": "Temporal Displacer",
+    "clearance": [
+      "666-66-6666",
+      "300-40-5060"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "798-86-5035",
+      "370-51-8676"
+    ]
+  },
+  {
+    "weapon_type": "Atomic Disassembler",
+    "clearance": [
+      "630-83-9782",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "583-88-4776",
+      "675-38-7050"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "113-69-2592",
+      "888-88-8888",
+      "425-45-4373",
+      "222-22-2222",
+      "906-66-4779"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "798-12-7350",
+      "300-40-5060",
+      "345-76-5432",
+      "444-44-4444"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "744-34-2314",
+      "789-32-1098",
+      "888-88-8888",
+      "300-40-5060",
+      "684-57-6919"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "567-54-3210",
+      "584-79-3541",
+      "555-55-5555",
+      "345-76-5432",
+      "234-87-6543"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "999-99-9999",
+      "789-32-1098"
+    ]
+  },
+  {
+    "weapon_type": "Phase Shifter",
+    "clearance": [
+      "777-77-7777",
+      "444-44-4444",
+      "394-54-2045",
+      "774-11-3139"
+    ]
+  },
+  {
+    "weapon_type": "Nano-Swarm Launcher",
+    "clearance": [
+      "888-88-8888",
+      "748-23-3029",
+      "300-40-5060"
+    ]
+  },
+  {
+    "weapon_type": "Antimatter Charge",
+    "clearance": [
+      "999-99-9999",
+      "100-20-3040"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "333-33-3333",
+      "444-44-4444"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "111-11-1111",
+      "333-33-3333",
+      "666-66-6666",
+      "456-65-4321"
+    ]
+  },
+  {
+    "weapon_type": "Kinetic Accelerator",
+    "clearance": [
+      "222-22-2222",
+      "326-37-2252",
+      "597-56-5820"
+    ]
+  },
+  {
+    "weapon_type": "Phase Shifter",
+    "clearance": [
+      "400-50-6070",
+      "407-36-6041",
+      "456-65-4321",
+      "222-22-2222",
+      "700-80-9010"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "890-21-0987",
+      "300-40-5060"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "700-80-9010",
+      "111-11-1111"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "300-40-5060",
+      "789-32-1098"
+    ]
+  },
+  {
+    "weapon_type": "Particle Beam Pistol",
+    "clearance": [
+      "285-42-8817",
+      "434-10-8154"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "873-32-9870",
+      "567-54-3210",
+      "456-65-4321",
+      "678-43-2109"
+    ]
+  },
+  {
+    "weapon_type": "Nano-Swarm Launcher",
+    "clearance": [
+      "200-30-4050",
+      "496-84-9961",
+      "563-67-2318",
+      "444-44-4444",
+      "888-88-8888"
+    ]
+  },
+  {
+    "weapon_type": "Laser Carbine",
+    "clearance": [
+      "678-43-2109",
+      "234-87-6543",
+      "555-55-5555",
+      "926-70-1461",
+      "666-66-6666"
+    ]
+  },
+  {
+    "weapon_type": "Bio-Electric Stunner",
+    "clearance": [
+      "298-84-1058",
+      "234-87-6543"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "971-76-6391",
+      "456-65-4321",
+      "678-43-2109",
+      "890-39-2118",
+      "111-11-1111"
+    ]
+  },
+  {
+    "weapon_type": "Particle Beam Pistol",
+    "clearance": [
+      "345-76-5432",
+      "111-93-2960",
+      "300-40-5060",
+      "333-33-3333"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "964-59-1761",
+      "999-99-9999",
+      "789-32-1098"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "789-32-1098",
+      "555-55-5555"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "456-65-4321",
+      "666-66-6666"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "700-80-9010",
+      "239-99-7849",
+      "244-33-4661"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "555-55-5555",
+      "666-66-6666",
+      "456-65-4321"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "890-21-0987",
+      "888-88-8888",
+      "895-80-9230"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "333-33-3333",
+      "400-50-6070",
+      "300-40-5060",
+      "666-66-6666",
+      "111-11-1111"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "567-54-3210",
+      "123-98-7654",
+      "737-90-4386",
+      "200-30-4050",
+      "234-87-6543"
+    ]
+  },
+  {
+    "weapon_type": "Plasma Rifle",
+    "clearance": [
+      "751-45-9737",
+      "400-50-6070",
+      "637-85-6621",
+      "980-19-6749"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "901-10-9876",
+      "386-76-7591",
+      "345-76-5432"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "600-70-8090",
+      "100-20-3040",
+      "700-80-9010",
+      "111-11-1111",
+      "456-65-4321"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "200-30-4050",
+      "456-65-4321",
+      "777-77-7777",
+      "283-38-7603"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "333-33-3333",
+      "222-22-2222",
+      "300-40-5060"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "900-10-1230",
+      "678-43-2109",
+      "593-39-1699",
+      "888-88-8888",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "777-77-7777",
+      "500-60-7080"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "300-40-5060",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "700-80-9010",
+      "727-12-3277",
+      "123-98-7654"
+    ]
+  },
+  {
+    "weapon_type": "Stealth Field Generator",
+    "clearance": [
+      "789-32-1098",
+      "234-87-6543",
+      "800-90-0120",
+      "600-70-8090",
+      "503-71-8865"
+    ]
+  },
+  {
+    "weapon_type": "Bio-Electric Stunner",
+    "clearance": [
+      "647-25-6069",
+      "345-76-5432",
+      "567-54-3210"
+    ]
+  },
+  {
+    "weapon_type": "Nano-Swarm Launcher",
+    "clearance": [
+      "400-50-6070",
+      "123-98-7654",
+      "600-70-8090",
+      "999-99-9999"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "100-20-3040",
+      "600-70-8090"
+    ]
+  },
+  {
+    "weapon_type": "Plasma Rifle",
+    "clearance": [
+      "901-10-9876",
+      "300-40-5060",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "742-54-1205",
+      "700-80-9010",
+      "777-77-7777",
+      "619-24-5288",
+      "345-76-5432"
+    ]
+  },
+  {
+    "weapon_type": "Quantum Disintegrator",
+    "clearance": [
+      "373-52-9860",
+      "123-98-7654",
+      "901-10-9876",
+      "555-55-5555"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "444-44-4444",
+      "500-60-7080",
+      "234-87-6543"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "825-27-4115",
+      "752-70-1378"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "500-60-7080",
+      "789-32-1098",
+      "678-43-2109",
+      "600-70-8090"
+    ]
+  },
+  {
+    "weapon_type": "Nano-Swarm Launcher",
+    "clearance": [
+      "444-44-4444",
+      "900-10-1230"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "600-70-8090"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "666-66-6666",
+      "866-66-6673",
+      "888-88-8888"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "222-22-2222",
+      "890-21-0987",
+      "900-10-1230",
+      "317-13-3355"
+    ]
+  },
+  {
+    "weapon_type": "Atomic Disassembler",
+    "clearance": [
+      "700-80-9010",
+      "567-54-3210",
+      "901-10-9876",
+      "345-76-5432"
+    ]
+  },
+  {
+    "weapon_type": "Holographic Decoy Projector",
+    "clearance": [
+      "100-20-3040",
+      "567-54-3210",
+      "456-65-4321",
+      "757-53-8006"
+    ]
+  },
+  {
+    "weapon_type": "Stealth Field Generator",
+    "clearance": [
+      "600-70-8090",
+      "777-77-7777",
+      "899-57-3247"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "555-55-5555",
+      "999-99-9999",
+      "678-43-2109",
+      "400-50-6070"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "555-55-5555",
+      "100-20-3040",
+      "256-30-9807",
+      "789-32-1098"
+    ]
+  },
+  {
+    "weapon_type": "Antimatter Charge",
+    "clearance": [
+      "789-32-1098",
+      "200-30-4050",
+      "500-60-7080",
+      "222-22-2222"
+    ]
+  },
+  {
+    "weapon_type": "Nano-Swarm Launcher",
+    "clearance": [
+      "630-50-3705",
+      "800-90-0120",
+      "972-48-9559"
+    ]
+  },
+  {
+    "weapon_type": "Atomic Disassembler",
+    "clearance": [
+      "333-33-3333",
+      "800-90-0120",
+      "890-21-0987"
+    ]
+  },
+  {
+    "weapon_type": "Quantum Disintegrator",
+    "clearance": [
+      "678-43-2109",
+      "678-55-9540",
+      "606-41-4735",
+      "345-76-5432"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "123-98-7654",
+      "777-55-7366"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "712-75-6227",
+      "600-70-8090",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "115-23-8935",
+      "100-20-3040",
+      "200-30-4050",
+      "901-10-9876"
+    ]
+  },
+  {
+    "weapon_type": "Temporal Displacer",
+    "clearance": [
+      "503-34-2571",
+      "280-80-7697",
+      "436-92-1388"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "655-64-9097",
+      "600-70-8090",
+      "345-76-5432"
+    ]
+  },
+  {
+    "weapon_type": "Mind Control Device",
+    "clearance": [
+      "400-50-6070",
+      "800-90-0120",
+      "761-44-5156",
+      "200-30-4050",
+      "970-46-4323"
+    ]
+  },
+  {
+    "weapon_type": "Quantum Disintegrator",
+    "clearance": [
+      "900-10-1230",
+      "555-55-5555",
+      "333-33-3333"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "600-70-8090",
+      "111-11-1111",
+      "772-39-9483"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "500-60-7080",
+      "901-10-9876"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "909-57-7533",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "789-32-1098",
+      "555-55-5555",
+      "755-41-8029"
+    ]
+  },
+  {
+    "weapon_type": "Atomic Disassembler",
+    "clearance": [
+      "700-80-9010",
+      "542-50-7120"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "842-15-4245",
+      "679-43-6205",
+      "666-66-6666",
+      "666-33-1345",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Stealth Field Generator",
+    "clearance": [
+      "719-88-8615",
+      "450-49-4553",
+      "121-11-1352",
+      "123-98-7654",
+      "728-71-8627"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "385-57-9799",
+      "555-55-5555",
+      "304-50-5854",
+      "100-20-3040"
+    ]
+  },
+  {
+    "weapon_type": "Temporal Displacer",
+    "clearance": [
+      "188-93-8730",
+      "553-15-8566",
+      "720-39-9880",
+      "226-89-2694",
+      "299-10-1644"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "999-99-9999",
+      "300-40-5060",
+      "456-65-4321",
+      "950-96-5835"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "400-50-6070",
+      "143-56-7864"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "414-24-7115",
+      "901-10-9876",
+      "547-95-7483"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "678-54-7057",
+      "100-20-3040",
+      "987-50-8727"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "777-77-7777",
+      "936-48-4513"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "537-64-1352",
+      "111-11-1111",
+      "567-54-3210",
+      "789-32-1098",
+      "500-60-7080"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "752-84-2275",
+      "300-40-5060",
+      "777-77-7777",
+      "100-20-3040"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "300-40-5060",
+      "901-10-9876"
+    ]
+  },
+  {
+    "weapon_type": "Atomic Disassembler",
+    "clearance": [
+      "888-88-8888",
+      "901-10-9876",
+      "270-71-9179",
+      "911-92-2374",
+      "789-32-1098"
+    ]
+  },
+  {
+    "weapon_type": "Gravity Wave Emitter",
+    "clearance": [
+      "263-30-5061",
+      "900-10-1230",
+      "567-54-3210"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "901-10-9876",
+      "640-38-2782"
+    ]
+  },
+  {
+    "weapon_type": "EMP Grenade",
+    "clearance": [
+      "711-69-1475",
+      "666-66-6666",
+      "234-87-6543",
+      "100-20-3040",
+      "777-77-7777"
+    ]
+  },
+  {
+    "weapon_type": "Kinetic Accelerator",
+    "clearance": [
+      "567-54-3210",
+      "234-87-6543",
+      "903-59-8629"
+    ]
+  },
+  {
+    "weapon_type": "Mind Control Device",
+    "clearance": [
+      "262-41-3221",
+      "901-10-9876",
+      "222-22-2222",
+      "858-12-6598"
+    ]
+  },
+  {
+    "weapon_type": "Laser Carbine",
+    "clearance": [
+      "555-55-5555",
+      "600-70-8090"
+    ]
+  },
+  {
+    "weapon_type": "Quantum Disintegrator",
+    "clearance": [
+      "799-47-3286",
+      "777-77-7777",
+      "234-87-6543",
+      "900-10-1230",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "393-24-6718",
+      "485-55-8729"
+    ]
+  },
+  {
+    "weapon_type": "Nano-Swarm Launcher",
+    "clearance": [
+      "777-46-8655",
+      "552-70-8174"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "345-76-5432",
+      "500-60-7080",
+      "669-71-3951",
+      "300-40-5060",
+      "777-77-7777"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "345-76-5432",
+      "700-80-9010",
+      "678-43-2109"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "111-11-1111",
+      "240-37-6755",
+      "700-80-9010"
+    ]
+  },
+  {
+    "weapon_type": "Plasma Rifle",
+    "clearance": [
+      "555-55-5555",
+      "111-11-1111"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "665-88-2751",
+      "901-10-9876"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "300-40-5060",
+      "794-45-4134",
+      "600-70-8090",
+      "444-44-4444",
+      "888-88-8888"
+    ]
+  },
+  {
+    "weapon_type": "Kinetic Accelerator",
+    "clearance": [
+      "123-98-7654",
+      "345-76-5432",
+      "789-32-1098",
+      "481-10-2138",
+      "678-43-2109"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "678-43-2109",
+      "123-98-7654",
+      "400-50-6070",
+      "666-66-6666"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "600-70-8090",
+      "225-70-4757",
+      "728-23-8151"
+    ]
+  },
+  {
+    "weapon_type": "Atomic Disassembler",
+    "clearance": [
+      "100-20-3040",
+      "894-64-3665",
+      "666-17-1575",
+      "911-81-1291",
+      "182-31-3518"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "444-44-4444",
+      "678-43-2109"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "234-87-6543",
+      "800-90-0120",
+      "400-50-6070"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "678-43-2109",
+      "333-33-3333",
+      "123-98-7654",
+      "700-80-9010",
+      "416-95-8758"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "171-17-2802",
+      "845-59-5124",
+      "999-99-9999",
+      "666-66-6666",
+      "600-70-8090"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "599-70-2559",
+      "400-50-6070",
+      "343-34-7930",
+      "666-66-6666",
+      "580-11-7320"
+    ]
+  },
+  {
+    "weapon_type": "Mind Control Device",
+    "clearance": [
+      "666-66-6666",
+      "456-65-4321",
+      "500-60-7080"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "600-70-8090",
+      "111-11-1111",
+      "199-80-6967",
+      "888-88-8888",
+      "505-61-5298"
+    ]
+  },
+  {
+    "weapon_type": "Laser Carbine",
+    "clearance": [
+      "555-55-5555",
+      "466-79-5652"
+    ]
+  },
+  {
+    "weapon_type": "Quantum Disintegrator",
+    "clearance": [
+      "411-65-8143",
+      "456-65-4321"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "155-54-8625",
+      "901-10-9876",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "345-76-5432",
+      "678-43-2109",
+      "597-15-9671"
+    ]
+  },
+  {
+    "weapon_type": "Quantum Disintegrator",
+    "clearance": [
+      "855-83-2958",
+      "423-69-1606",
+      "789-32-1098",
+      "900-10-1230",
+      "566-71-4540"
+    ]
+  },
+  {
+    "weapon_type": "Antimatter Charge",
+    "clearance": [
+      "333-33-3333",
+      "222-22-2222",
+      "100-20-3040",
+      "666-66-6666",
+      "558-49-1361"
+    ]
+  },
+  {
+    "weapon_type": "Phase Shifter",
+    "clearance": [
+      "200-30-4050",
+      "916-79-5158",
+      "500-60-7080",
+      "900-10-1230"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "360-76-1891",
+      "100-20-3040",
+      "624-23-2105",
+      "678-43-2109"
+    ]
+  },
+  {
+    "weapon_type": "Ion Cannon",
+    "clearance": [
+      "400-50-6070",
+      "906-98-8122",
+      "200-30-4050",
+      "666-66-6666",
+      "901-10-9876"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "777-77-7777",
+      "789-32-1098",
+      "652-59-7260"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "500-60-7080",
+      "963-99-6464"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "200-30-4050",
+      "456-65-4321",
+      "800-90-0120",
+      "999-99-9999"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "901-10-9876",
+      "444-44-4444",
+      "456-65-4321"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "678-43-2109",
+      "100-20-3040",
+      "863-21-1607",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Bio-Electric Stunner",
+    "clearance": [
+      "426-84-4396",
+      "900-10-1230",
+      "456-65-4321",
+      "777-77-7777",
+      "126-91-2237"
+    ]
+  },
+  {
+    "weapon_type": "Nano-Swarm Launcher",
+    "clearance": [
+      "666-66-6666",
+      "111-11-1111",
+      "444-44-4444"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "400-50-6070",
+      "438-88-8315"
+    ]
+  },
+  {
+    "weapon_type": "Subspace Bomb",
+    "clearance": [
+      "512-75-9748",
+      "971-71-1989",
+      "953-29-6646",
+      "943-20-5553"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "997-29-4430",
+      "777-77-7777",
+      "925-74-3636"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "123-98-7654",
+      "345-76-5432"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "400-50-6070",
+      "999-99-9999",
+      "222-22-2222"
+    ]
+  },
+  {
+    "weapon_type": "Gravity Wave Emitter",
+    "clearance": [
+      "524-51-7799",
+      "333-33-3333",
+      "666-66-6666",
+      "600-70-8090"
+    ]
+  },
+  {
+    "weapon_type": "Particle Beam Pistol",
+    "clearance": [
+      "333-33-3333",
+      "300-40-5060"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "678-43-2109",
+      "234-87-6543",
+      "500-60-7080",
+      "111-11-1111"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "800-90-0120",
+      "686-87-2077",
+      "901-10-9876",
+      "222-22-2222",
+      "199-39-8522"
+    ]
+  },
+  {
+    "weapon_type": "Bio-Electric Stunner",
+    "clearance": [
+      "673-27-4509",
+      "335-81-2060",
+      "222-22-2222",
+      "800-90-0120",
+      "511-33-7345"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "900-10-1230",
+      "444-44-4444",
+      "111-11-1111",
+      "888-88-8888",
+      "700-80-9010"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "345-76-5432",
+      "823-98-6484",
+      "606-84-9714"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "666-66-6666",
+      "400-50-6070",
+      "800-90-0120",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "999-99-9999",
+      "222-22-2222",
+      "890-21-0987"
+    ]
+  },
+  {
+    "weapon_type": "Vortex Generator",
+    "clearance": [
+      "123-98-7654",
+      "400-56-3401"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "123-98-7654",
+      "200-48-3542",
+      "856-30-9584",
+      "606-46-2352",
+      "210-89-5907"
+    ]
+  },
+  {
+    "weapon_type": "Phase Shifter",
+    "clearance": [
+      "888-88-8888",
+      "789-32-1098",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Phase Shifter",
+    "clearance": [
+      "900-10-1230",
+      "888-88-8888",
+      "117-62-4617",
+      "253-59-2118",
+      "770-74-5872"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "777-77-7777",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Stealth Field Generator",
+    "clearance": [
+      "657-64-7679",
+      "800-90-0120",
+      "222-22-2222",
+      "234-87-6543"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "890-16-8232",
+      "202-23-6167",
+      "776-20-1434"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "800-90-0120",
+      "676-95-3360"
+    ]
+  },
+  {
+    "weapon_type": "Neural Stunner",
+    "clearance": [
+      "700-80-9010",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Phase Shifter",
+    "clearance": [
+      "200-30-4050",
+      "794-11-4514",
+      "488-98-7275",
+      "333-33-3333"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "456-65-4321",
+      "651-11-1460",
+      "234-87-6543"
+    ]
+  },
+  {
+    "weapon_type": "Gravity Wave Emitter",
+    "clearance": [
+      "222-22-2222",
+      "400-50-6070",
+      "200-30-4050"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "600-70-8090",
+      "234-87-6543",
+      "700-80-9010",
+      "333-33-3333",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Mind Control Device",
+    "clearance": [
+      "567-54-3210",
+      "901-10-9876",
+      "444-44-4444",
+      "796-51-8449",
+      "202-38-1876"
+    ]
+  },
+  {
+    "weapon_type": "Mind Control Device",
+    "clearance": [
+      "500-60-7080",
+      "849-94-6336"
+    ]
+  },
+  {
+    "weapon_type": "Temporal Displacer",
+    "clearance": [
+      "444-44-4444",
+      "109-51-7409",
+      "339-77-4142",
+      "901-10-9876",
+      "600-70-8090"
+    ]
+  },
+  {
+    "weapon_type": "EMP Grenade",
+    "clearance": [
+      "438-99-4520",
+      "364-49-6749"
+    ]
+  },
+  {
+    "weapon_type": "EMP Grenade",
+    "clearance": [
+      "999-99-9999",
+      "234-87-6543",
+      "624-48-4537"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "678-43-2109",
+      "173-31-1811"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "500-60-7080",
+      "239-73-1279",
+      "200-30-4050",
+      "100-20-3040",
+      "897-49-2643"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "678-43-2109",
+      "195-98-9961"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "600-70-8090",
+      "456-65-4321",
+      "444-44-4444",
+      "789-32-1098",
+      "987-93-8982"
+    ]
+  },
+  {
+    "weapon_type": "Gravity Wave Emitter",
+    "clearance": [
+      "234-87-6543",
+      "444-44-4444",
+      "555-55-5555"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "946-34-8230",
+      "555-55-5555",
+      "888-88-8888",
+      "234-87-6543"
+    ]
+  },
+  {
+    "weapon_type": "Atomic Disassembler",
+    "clearance": [
+      "240-19-1089",
+      "500-60-7080",
+      "123-98-7654"
+    ]
+  },
+  {
+    "weapon_type": "Stealth Field Generator",
+    "clearance": [
+      "333-33-3333",
+      "567-54-3210"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "242-29-6597",
+      "872-93-1445",
+      "100-20-3040",
+      "481-49-3453",
+      "456-65-4321"
+    ]
+  },
+  {
+    "weapon_type": "Mind Control Device",
+    "clearance": [
+      "777-77-7777",
+      "100-20-3040",
+      "333-33-3333",
+      "567-54-3210",
+      "217-54-3682"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "300-40-5060",
+      "909-60-3612"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "678-43-2109",
+      "636-94-2314"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "856-42-2450",
+      "890-21-0987",
+      "625-15-3816",
+      "222-22-2222",
+      "411-89-1516"
+    ]
+  },
+  {
+    "weapon_type": "Bio-Electric Stunner",
+    "clearance": [
+      "272-49-5593",
+      "222-22-2222",
+      "500-60-7080",
+      "777-77-7777"
+    ]
+  },
+  {
+    "weapon_type": "Energy Shield Breaker",
+    "clearance": [
+      "539-37-7294",
+      "531-58-7548",
+      "700-80-9010",
+      "111-11-1111",
+      "510-79-5600"
+    ]
+  },
+  {
+    "weapon_type": "Photon Blade",
+    "clearance": [
+      "466-40-7761",
+      "123-98-7654"
+    ]
+  },
+  {
+    "weapon_type": "Mind Control Device",
+    "clearance": [
+      "666-66-6666",
+      "500-60-7080",
+      "164-98-4336",
+      "222-22-2222",
+      "901-10-9876"
+    ]
+  },
+  {
+    "weapon_type": "Gravity Wave Emitter",
+    "clearance": [
+      "345-76-5432",
+      "234-87-6543",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Plasma Rifle",
+    "clearance": [
+      "123-98-7654",
+      "678-43-2109",
+      "600-70-8090",
+      "279-10-9465",
+      "700-80-9010"
+    ]
+  },
+  {
+    "weapon_type": "Molecular Destabilizer",
+    "clearance": [
+      "200-30-4050",
+      "123-98-7654",
+      "361-17-5486",
+      "567-54-3210"
+    ]
+  },
+  {
+    "weapon_type": "Microwave Emitter",
+    "clearance": [
+      "122-29-5248",
+      "300-40-5060",
+      "678-43-2109",
+      "345-76-5432"
+    ]
+  },
+  {
+    "weapon_type": "Laser Carbine",
+    "clearance": [
+      "271-40-5673",
+      "901-10-9876"
+    ]
+  },
+  {
+    "weapon_type": "Stealth Field Generator",
+    "clearance": [
+      "142-30-3321",
+      "400-50-6070",
+      "666-66-6666",
+      "300-40-5060"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "999-99-9999",
+      "789-32-1098",
+      "900-10-1230",
+      "258-77-8000"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "123-98-7654",
+      "700-80-9010"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "234-87-6543",
+      "123-98-7654",
+      "888-88-8888",
+      "932-21-9260"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "928-77-2974",
+      "222-22-2222"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "281-99-5495",
+      "200-30-4050",
+      "518-62-3617",
+      "666-66-6666",
+      "119-28-1986"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "111-11-1111",
+      "800-90-0120"
+    ]
+  },
+  {
+    "weapon_type": "Temporal Displacer",
+    "clearance": [
+      "345-76-5432",
+      "666-66-6666"
+    ]
+  },
+  {
+    "weapon_type": "Kinetic Accelerator",
+    "clearance": [
+      "567-54-3210",
+      "403-51-7099"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "900-10-1230",
+      "678-43-2109"
+    ]
+  },
+  {
+    "weapon_type": "Electromagnetic Pulse Device",
+    "clearance": [
+      "400-50-6070",
+      "500-60-7080"
+    ]
+  },
+  {
+    "weapon_type": "Railgun Pistol",
+    "clearance": [
+      "678-43-2109",
+      "301-13-1397",
+      "200-30-4050",
+      "789-32-1098",
+      "732-90-3131"
+    ]
+  },
+  {
+    "weapon_type": "Bio-Electric Stunner",
+    "clearance": [
+      "901-10-9876",
+      "900-10-1230",
+      "770-54-9899",
+      "571-85-8746",
+      "222-22-2222"
+    ]
+  },
+  {
+    "weapon_type": "Sonic Disruptor",
+    "clearance": [
+      "181-77-7638",
+      "600-70-8090"
+    ]
+  },
+  {
+    "weapon_type": "Holographic Decoy Projector",
+    "clearance": [
+      "618-95-3363",
+      "222-22-2222",
+      "111-11-1111"
+    ]
+  },
+  {
+    "weapon_type": "Bio-Electric Stunner",
+    "clearance": [
+      "666-66-6666",
+      "777-77-7777",
+      "700-80-9010"
+    ]
+  },
+  {
+    "weapon_type": "Antimatter Charge",
+    "clearance": [
+      "680-89-8060",
+      "901-10-9876",
+      "400-50-6070",
+      "444-44-4444"
+    ]
+  },
+  {
+    "weapon_type": "Dark Matter Injector",
+    "clearance": [
+      "749-41-8641",
+      "307-85-9911"
+    ]
+  },
+  {
+    "weapon_type": "Particle Beam Pistol",
+    "clearance": [
+      "678-43-2109",
+      "444-44-4444",
+      "234-87-6543",
+      "800-90-0120",
+      "777-77-7777"
+    ]
+  },
+  {
+    "weapon_type": "Neurotoxin Dart Gun",
+    "clearance": [
+      "555-55-5555",
+      "800-90-0120",
+      "400-50-6070",
+      "890-21-0987",
+      "170-96-6193"
+    ]
+  },
+  {
+    "weapon_type": "Cryogenic Projector",
+    "clearance": [
+      "402-62-7074",
+      "534-39-7292",
+      "333-33-3333",
+      "222-22-2222",
+      "763-28-2538"
+    ]
+  },
+  {
+    "weapon_type": "Plasma Rifle",
+    "clearance": [
+      "700-80-9010",
+      "762-17-7853",
+      "351-59-1357",
+      "500-60-7080"
+    ]
+  }
+]
