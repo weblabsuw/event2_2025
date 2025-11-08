@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { dev } from '$app/environment';
-	import { EditorView, basicSetup } from 'codemirror';
+	import { EditorView, basicSetup, minimalSetup } from 'codemirror';
 	import { json } from '@codemirror/lang-json';
-	import { oneDark } from '@codemirror/theme-one-dark';
+	import { abcdef } from '@fsegurai/codemirror-theme-abcdef';
 
 	type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -46,7 +46,9 @@
 
 		try {
 			// Prepend base URL to the path
-			const fullUrl = url.startsWith('http') ? url : `${BASE_URL}${url.startsWith('/') ? url : '/' + url}`;
+			const fullUrl = url.startsWith('http')
+				? url
+				: `${BASE_URL}${url.startsWith('/') ? url : '/' + url}`;
 
 			// Build headers object, filtering out empty headers
 			const headerObj: Record<string, string> = {};
@@ -127,7 +129,15 @@
 		// Initialize CodeMirror editor
 		editorView = new EditorView({
 			doc: 'Response will appear here...',
-			extensions: [basicSetup, json(), oneDark, EditorView.editable.of(false)],
+			extensions: [
+				minimalSetup,
+				json(),
+				abcdef,
+				EditorView.editable.of(false),
+				EditorView.theme({
+					'&': { backgroundColor: '#0003 !important' } // semi-transparent background
+				})
+			],
 			parent: editorContainer
 		});
 
@@ -153,20 +163,22 @@
 	}
 </script>
 
-<div class="flex flex-col border border-[#23482f] rounded-lg overflow-hidden min-h-[600px] lg:min-h-0 @container">
+<div
+	class="@container flex min-h-[600px] flex-col overflow-hidden rounded-lg border border-[#23482f] lg:min-h-0"
+>
 	<div class="flex items-center border-b border-solid border-[#23482f] px-4 py-2">
-		<h3 class="text-primary text-lg font-bold leading-tight tracking-[-0.015em] font-pixel">
+		<h3 class="font-pixel text-lg leading-tight font-bold tracking-[-0.015em] text-primary">
 			REST_API_CLIENT // SECURE_CHANNEL
 		</h3>
 	</div>
-	<div class="flex flex-col flex-1">
-		<div class="p-4 space-y-4">
+	<div class="flex flex-1 flex-col">
+		<div class="space-y-4 p-4">
 			<!-- Method + URL + Send button -->
-			<div class="flex flex-col @md:flex-row gap-2">
+			<div class="flex flex-col gap-2 @md:flex-row">
 				<div class="shrink-0">
 					<select
 						bind:value={method}
-						class="w-full @md:w-32 h-12 bg-[#23482f] border-0 rounded-lg text-primary font-bold font-pixel text-lg focus:ring-primary px-3"
+						class="h-12 w-full rounded-lg border-0 bg-[#23482f] px-3 font-pixel text-lg font-bold text-primary focus:ring-primary @md:w-32"
 					>
 						<option>GET</option>
 						<option>POST</option>
@@ -178,14 +190,14 @@
 				<input
 					bind:value={url}
 					onkeydown={handleKeyDown}
-					class="flex-1 h-12 bg-[#23482f] border-0 rounded-lg text-white font-pixel text-lg placeholder:text-gray-400 focus:ring-primary px-4"
+					class="h-12 flex-1 rounded-lg border-0 bg-[#23482f] px-4 font-pixel text-lg text-white placeholder:text-gray-400 focus:ring-primary"
 					placeholder="/api/v1/targets/..."
 					type="text"
 				/>
 				<button
 					onclick={sendRequest}
 					disabled={loading || !url}
-					class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-primary text-[#112217] text-sm font-bold leading-normal tracking-[0.015em] disabled:opacity-50 disabled:cursor-not-allowed"
+					class="flex h-12 max-w-[480px] min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 text-sm leading-normal font-bold tracking-[0.015em] text-[#112217] disabled:cursor-not-allowed disabled:opacity-50"
 				>
 					<span class="truncate">{loading ? 'SENDING...' : 'TRANSMIT'}</span>
 				</button>
@@ -194,11 +206,11 @@
 			<!-- Headers section -->
 			<div class="flex flex-col gap-2">
 				<div class="flex items-center gap-2">
-					<h4 class="text-primary font-pixel text-lg">HEADERS</h4>
+					<h4 class="font-pixel text-lg text-primary">HEADERS</h4>
 					<div class="h-px flex-1 bg-[#23482f]"></div>
 					<button
 						onclick={addHeader}
-						class="text-primary hover:text-white text-sm font-bold transition-colors"
+						class="text-sm font-bold text-primary transition-colors hover:text-white"
 					>
 						ADD
 					</button>
@@ -208,19 +220,19 @@
 					<div class="flex items-center gap-2">
 						<input
 							bind:value={header.key}
-							class="flex-1 h-10 bg-[#0c1a10] border-0 rounded-lg text-white font-pixel text-base placeholder:text-gray-500 focus:ring-primary px-3"
+							class="h-10 flex-1 rounded-lg border-0 bg-[#0c1a10] px-3 font-pixel text-base text-white placeholder:text-gray-500 focus:ring-primary"
 							placeholder="Header-Name"
 							type="text"
 						/>
 						<input
 							bind:value={header.value}
-							class="flex-1 h-10 bg-[#0c1a10] border-0 rounded-lg text-white font-pixel text-base placeholder:text-gray-500 focus:ring-primary px-3"
+							class="h-10 flex-1 rounded-lg border-0 bg-[#0c1a10] px-3 font-pixel text-base text-white placeholder:text-gray-500 focus:ring-primary"
 							placeholder="value"
 							type="text"
 						/>
 						<button
 							onclick={() => removeHeader(i)}
-							class="text-red-500/70 hover:text-red-500 transition-colors p-2"
+							class="p-2 text-red-500/70 transition-colors hover:text-red-500"
 						>
 							<span class="material-symbols-outlined">delete</span>
 						</button>
@@ -230,22 +242,23 @@
 		</div>
 
 		<!-- Response section -->
-		<div class="flex-1 flex flex-col min-h-0">
+		<div class="flex min-h-0 flex-1 flex-col">
 			<div class="flex items-center justify-between border-y border-[#23482f] px-4 py-2">
-				<h4 class="text-primary font-pixel text-lg">RESPONSE</h4>
+				<h4 class="font-pixel text-lg text-primary">RESPONSE</h4>
 				{#if response}
 					<div class="flex items-center gap-4 text-sm font-bold">
 						<span class={getStatusColor(response.status)}>
-							STATUS: {response.status} {response.statusText}
+							STATUS: {response.status}
+							{response.statusText}
 						</span>
 						<span class="text-gray-400">TIME: {response.time}ms</span>
 						<span class="text-gray-400">SIZE: {formatBytes(response.size)}</span>
 					</div>
 				{:else}
-					<span class="text-gray-500 text-sm">Ready to transmit...</span>
+					<span class="text-sm text-gray-500">Ready to transmit...</span>
 				{/if}
 			</div>
-			<div class="flex-1 overflow-auto min-h-0">
+			<div class="min-h-0 flex-1 overflow-auto">
 				<div bind:this={editorContainer} class="h-full"></div>
 			</div>
 		</div>
