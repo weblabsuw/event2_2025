@@ -171,7 +171,7 @@
 									</span>
 								{/if}
 								{#if executionTime !== null}
-									<span class="font-pixel text-sm text-gray-400">
+									<span class="font-pixel text-sm text-gray-400 {results.length > 0 ? 'ml-4' : 'ml-auto'}">
 										EXEC_TIME: {executionTime}ms
 									</span>
 								{/if}
