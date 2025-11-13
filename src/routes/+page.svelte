@@ -1,6 +1,108 @@
 <script lang="ts">
 	import Header from '$lib/components/Header.svelte';
 
+	// Form state
+	let murdererName = $state('');
+	let murderWeapon = $state('');
+	let murderLocation = $state('');
+	let isSubmitting = $state(false);
+	let resultMessage = $state('');
+	let resultSuccess = $state(false);
+
+	// TODO: Replace this with your encoded success message
+	// To encode your message:
+	// 1. Determine the correct answer key: murdererName + murderWeapon + murderLocation
+	//    Example: "John SmithKnifeGrand Hotel, Paris"
+	// 2. Run this encoding function in Node.js or browser console:
+	//
+	//    function encodeMessage(message, key) {
+	//      const msgBytes = new TextEncoder().encode(message);
+	//      const keyBytes = new TextEncoder().encode(key);
+	//      const encoded = new Uint8Array(msgBytes.length);
+	//      for (let i = 0; i < msgBytes.length; i++) {
+	//        encoded[i] = msgBytes[i] ^ keyBytes[i % keyBytes.length];
+	//      }
+	//      return Array.from(encoded).map(b => b.toString(16).padStart(2, '0')).join('');
+	//    }
+	//
+	//    const correctKey = "John SmithKnifeGrand Hotel, Paris";
+	//    const successMsg = "🎉 CASE SOLVED! Agent Web's murderer has been identified. Excellent detective work!";
+	//    console.log(encodeMessage(successMsg, correctKey));
+	//
+	// 3. Copy the hex output and paste it below
+	const ENCODED_SUCCESS_MESSAGE = "baf0e6e700102c3a314818212530200353412f0345261b5432094e0723411f1c012e0a1a0b527305080748290b0c08452e16040010492e061101420c65280217051f2f011c4e4436190c171c22180c461228000a4f";
+	const SUCCESS_MESSAGE_HASH = "ebb5bfcb22eee677b43be085ad46f88111b56684204e93ab6e125f3a8594a439"
+
+	/**
+	 * XOR decode using the answer key
+	 * Returns the decoded message if key is correct, otherwise returns garbage
+	 */
+	function decodeMessage(encodedHex: string, key: string): string {
+		try {
+			// Convert hex string to bytes
+			const encodedBytes = new Uint8Array(
+				encodedHex.match(/.{1,2}/g)?.map(byte => parseInt(byte, 16)) || []
+			);
+
+			// Convert key to bytes
+			const keyBytes = new TextEncoder().encode(key);
+
+			// XOR decode
+			const decoded = new Uint8Array(encodedBytes.length);
+			for (let i = 0; i < encodedBytes.length; i++) {
+				decoded[i] = encodedBytes[i] ^ keyBytes[i % keyBytes.length];
+			}
+
+			// Convert back to string
+			return new TextDecoder().decode(decoded);
+		} catch (e) {
+			return '';
+		}
+	}
+
+	/**
+	 * Handle form submission
+	 */
+	async function handleSubmit(event: Event) {
+		event.preventDefault();
+
+		isSubmitting = true;
+		resultMessage = '';
+		resultSuccess = false;
+
+		// Simulate processing delay for effect
+		await new Promise(resolve => setTimeout(resolve, 1500));
+
+		try {
+			// Concatenate answers to form the decryption key
+			const answerKey = murdererName + murderWeapon + murderLocation;
+
+			// Attempt to decode the success message
+			const decoded = decodeMessage(ENCODED_SUCCESS_MESSAGE, answerKey);
+
+			// Compute hash of decoded message
+			const decodedHash = await computeHash(decoded);
+			console.log(decodedHash);
+
+			// Verify the hash matches the expected hash
+			if (decodedHash === SUCCESS_MESSAGE_HASH) {
+				// Hash matches - correct answer!
+				resultSuccess = true;
+				resultMessage = decoded;
+			} else {
+				// Hash doesn't match - wrong answer
+				resultSuccess = false;
+				resultMessage = '❌ ACCESS DENIED: Incorrect answer. Review your evidence and try again.';
+			}
+		} catch (e) {
+			// Decoding or hashing failed
+			resultSuccess = false;
+			resultMessage = '❌ ACCESS DENIED: Incorrect answer. Review your evidence and try again.';
+		}
+
+		isSubmitting = false;
+	}
+
 	const missions = [
 		{
 			id: 'sql',
@@ -159,6 +261,80 @@
 					<p class="mt-2 font-mono text-s text-gray-500">
 						Complete all three missions to gather enough intelligence. Each mission provides crucial data that interconnects with the others. Cross-reference your findings to solve the mystery.
 					</p>
+				</div>
+			</section>
+
+			<!-- Answer Submission -->
+			<section class="w-full max-w-4xl">
+				<div class="rounded-lg border-2 border-spy-red bg-spy-red/5 p-8">
+					<h2 class="mb-6 font-pixel text-3xl text-spy-red">SUBMIT FINAL REPORT</h2>
+
+					<form onsubmit={handleSubmit} class="space-y-6">
+						<div class="space-y-4">
+							<!-- Murderer Name -->
+							<div class="text-left">
+								<label for="murderer" class="mb-2 block font-pixel text-sm text-gray-300">
+									MURDERER'S NAME (First Last)
+								</label>
+								<input
+									id="murderer"
+									type="text"
+									bind:value={murdererName}
+									placeholder="e.g., John Smith"
+									class="w-full rounded-lg border border-gray-600 bg-black/40 px-4 py-3 font-mono text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
+									required
+								/>
+							</div>
+
+							<!-- Murder Weapon -->
+							<div class="text-left">
+								<label for="weapon" class="mb-2 block font-pixel text-sm text-gray-300">
+									MURDER WEAPON
+								</label>
+								<input
+									id="weapon"
+									type="text"
+									bind:value={murderWeapon}
+									placeholder="e.g., Knife"
+									class="w-full rounded-lg border border-gray-600 bg-black/40 px-4 py-3 font-mono text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
+									required
+								/>
+							</div>
+
+							<!-- Murder Location -->
+							<div class="text-left">
+								<label for="location" class="mb-2 block font-pixel text-sm text-gray-300">
+									MURDER LOCATION (Building, City)
+								</label>
+								<input
+									id="location"
+									type="text"
+									bind:value={murderLocation}
+									placeholder="e.g., Grand Hotel, Paris"
+									class="w-full rounded-lg border border-gray-600 bg-black/40 px-4 py-3 font-mono text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
+									required
+								/>
+							</div>
+						</div>
+
+						<!-- Submit Button -->
+						<button
+							type="submit"
+							disabled={isSubmitting}
+							class="w-full rounded-lg border-2 border-primary bg-primary/10 px-6 py-4 font-pixel text-lg text-primary transition-all hover:bg-primary/20 hover:shadow-lg hover:shadow-primary/50 disabled:opacity-50 disabled:cursor-not-allowed"
+						>
+							{isSubmitting ? 'DECRYPTING...' : 'SUBMIT REPORT →'}
+						</button>
+					</form>
+
+					<!-- Result Message -->
+					{#if resultMessage}
+						<div class="mt-6 rounded-lg border-2 p-6 {resultSuccess ? 'border-primary bg-primary/10' : 'border-spy-red bg-spy-red/10'}">
+							<p class="font-pixel text-lg {resultSuccess ? 'text-primary' : 'text-spy-red'}">
+								{resultMessage}
+							</p>
+						</div>
+					{/if}
 				</div>
 			</section>
 		</main>
