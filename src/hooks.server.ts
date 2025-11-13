@@ -7,28 +7,36 @@ export const handle: Handle = async ({ event, resolve }) => {
     const response = await resolve(event, {
       transformPageChunk: ({ html }) => html,
     });
-    
-    // If it's an error response (4xx or 5xx), convert to JSON
-    if (response.status >= 400) {
+
+    // Only handle 404s that don't have JSON content (i.e., route not found)
+    if (response.status === 404) {
+      const contentType = response.headers.get('Content-Type');
+
+      // If response already has JSON content, pass it through (endpoint handled it)
+      if (contentType?.includes('application/json')) {
+        return response;
+      }
+
+      // Otherwise, format a generic 404 for routes that don't exist
       return new Response(
         JSON.stringify({
           error: {
-            message: response.statusText || 'An error occurred',
-            status: response.status,
+            message: 'API endpoint not found',
+            status: 404,
             path: event.url.pathname
           }
         }),
         {
-          status: response.status,
+          status: 404,
           headers: {
             'Content-Type': 'application/json'
           }
         }
       );
     }
-    
+
     return response;
   }
-  
+
   return resolve(event);
 };  

@@ -17,13 +17,34 @@ export type InventoryItem = {
 	data: string; // Base64 encoded JSON of WeaponData
 };
 
-export const CITIES = ['New York', 'Seattle', 'Portland', 'San Francisco', 'Los Angeles'];
+export const CITIES: string[] = [
+	"New York, United States",
+	"London, United Kingdom",
+	"Paris, France",
+	"Moscow, Russia",
+	"Beijing, China",
+	"Shanghai, China",
+	"Dubai, United Arab Emirates",
+	"Istanbul, Turkey",
+	"Tokyo, Japan",
+	"Hong Kong, China",
+	"Sao Paulo, Brazil",
+	"Mexico City, Mexico",
+	"Los Angeles, United States",
+	"Mumbai, India",
+	"Cairo, Egypt",
+	"Berlin, Germany",
+	"Singapore, Singapore",
+	"Sydney, Australia",
+	"Rome, Italy",
+	"Seoul, South Korea"
+];
 
 // Special weapon that only appears in New York inventory
 // This is the murder weapon - SSN should match one from SPIDER data
 const NY_SPECIAL_WEAPON: WeaponData = {
 	weapon_type: 'Nano-Toxin Injector',
-	clearance: ['324-26-8712', '555-12-3456', '789-01-2345']
+	clearance: ['
 };
 
 /**

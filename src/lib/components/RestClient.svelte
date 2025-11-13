@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import { dev } from '$app/environment';
 	import { EditorView, basicSetup, minimalSetup } from 'codemirror';
 	import { json } from '@codemirror/lang-json';
@@ -23,10 +23,13 @@
 	let method = $state<HttpMethod>('GET');
 	let url = $state('');
 	let headers = $state<Header[]>([{ key: '', value: '' }]);
+	let requestBody = $state('');
 	let response = $state<ResponseData>(null);
 	let loading = $state(false);
 	let editorContainer: HTMLDivElement;
 	let editorView: EditorView | null = null;
+	let bodyEditorContainer: HTMLDivElement | null = $state(null);
+	let bodyEditorView: EditorView | null = null;
 
 	const BASE_URL = dev ? 'http://localhost:5173' : 'https://event2.weblabs.club';
 
@@ -58,10 +61,20 @@
 				}
 			});
 
-			const res = await fetch(fullUrl, {
+			// Include body only for methods that support it and if body is not empty
+			const fetchOptions: RequestInit = {
 				method,
 				headers: headerObj
-			});
+			};
+
+			if (
+				requestBody.trim() &&
+				(method === 'POST' || method === 'PUT' || method === 'PATCH' || method === 'DELETE')
+			) {
+				fetchOptions.body = requestBody;
+			}
+
+			const res = await fetch(fullUrl, fetchOptions);
 
 			const endTime = performance.now();
 			const responseText = await res.text();
@@ -126,7 +139,7 @@
 	}
 
 	onMount(() => {
-		// Initialize CodeMirror editor
+		// Initialize response CodeMirror editor
 		editorView = new EditorView({
 			doc: 'Response will appear here...',
 			extensions: [
@@ -144,6 +157,38 @@
 		return () => {
 			editorView?.destroy();
 		};
+	});
+
+	// Initialize body editor when container becomes available
+	$effect(() => {
+		// Cleanup previous editor if it exists
+		if (bodyEditorView) {
+			bodyEditorView.destroy();
+			bodyEditorView = null;
+		}
+
+		// Initialize new editor if container exists
+		if (bodyEditorContainer) {
+			bodyEditorView = new EditorView({
+				doc: untrack(() => requestBody), // Don't track requestBody changes
+				extensions: [
+					minimalSetup,
+					json(),
+					abcdef,
+					EditorView.editable.of(true),
+					EditorView.lineWrapping,
+					EditorView.theme({
+						'&': { backgroundColor: '#0003 !important' } // semi-transparent background
+					}),
+					EditorView.updateListener.of((update) => {
+						if (update.docChanged) {
+							requestBody = update.state.doc.toString();
+						}
+					})
+				],
+				parent: bodyEditorContainer
+			});
+		}
 	});
 
 	function getStatusColor(status: number | undefined): string {
@@ -239,6 +284,20 @@
 					</div>
 				{/each}
 			</div>
+
+			<!-- Body section -->
+			{#if method === 'POST' || method === 'PUT' || method === 'PATCH' || method === 'DELETE'}
+				<div class="flex flex-col gap-2">
+					<div class="flex items-center gap-2">
+						<h4 class="font-pixel text-lg text-primary">BODY</h4>
+						<div class="h-px flex-1 bg-[#23482f]"></div>
+						<span class="text-xs text-gray-500">JSON payload</span>
+					</div>
+					<div class="h-[200px] overflow-hidden rounded-lg border border-[#23482f]">
+						<div bind:this={bodyEditorContainer} class="h-full"></div>
+					</div>
+				</div>
+			{/if}
 		</div>
 
 		<!-- Response section -->
