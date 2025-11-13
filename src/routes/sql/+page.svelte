@@ -1,19 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { EditorView, minimalSetup } from 'codemirror';
-	import { sql } from '@codemirror/lang-sql';
-	import { abcdef } from '@fsegurai/codemirror-theme-abcdef';
-	import initSqlJs, { type Database, type QueryExecResult } from 'sql.js';
+	import initSqlJs, { type Database } from 'sql.js';
 	import Header from '$lib/components/Header.svelte';
+	import SqlTerminal from '$lib/components/SqlTerminal.svelte';
 
 	let db = $state<Database | null>(null);
-	let sqlQuery = $state('SELECT * FROM sqlite_master WHERE type="table";');
-	let results = $state<QueryExecResult[] | null>(null);
 	let error = $state<string | null>(null);
-	let loading = $state(false);
-	let executionTime = $state<number | null>(null);
-	let editorContainer: HTMLDivElement;
-	let editorView: EditorView | null = null;
+	let part1Solved = $state(false);
+	let part2Solved = $state(false);
+
+	const PART1_ANSWER_HASH = '3F0214FEB4E0C5D2BD49E2E5B208469170D1CE1BA189BBA78835673F6C89C08D';
+	const PART2_ANSWER_HASH = '5D09E7544B3869EAF4DAF14D4411D77D4C2F903113BF39ED92AC9BA7622B8AAD';
 
 	async function loadDatabase() {
 		error = null;
@@ -37,80 +34,18 @@
 		}
 	}
 
-	function executeQuery() {
-		if (!db) {
-			error = 'Database not loaded. Please refresh the page.';
-			return;
-		}
-
-		if (!sqlQuery.trim()) {
-			error = 'Please enter a SQL query';
-			return;
-		}
-
-		loading = true;
-		error = null;
-		const startTime = performance.now();
-
-		try {
-			const queryResults = db.exec(sqlQuery);
-			const endTime = performance.now();
-
-			results = queryResults;
-			executionTime = Math.round(endTime - startTime);
-
-			// If no results, might be a successful non-SELECT query
-			if (queryResults.length === 0) {
-				// Check if it was a modification query
-				results = [];
-			}
-		} catch (err) {
-			error = err instanceof Error ? err.message : String(err);
-			results = null;
-			executionTime = null;
-		} finally {
-			loading = false;
-		}
+	function handlePart1Solved() {
+		part1Solved = true;
 	}
 
-	function handleKeyDown(e: KeyboardEvent) {
-		if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-			executeQuery();
-		}
+	function handlePart2Solved() {
+		part2Solved = true;
 	}
 
 	onMount(() => {
-		// Load the database
 		loadDatabase();
 
-		// Initialize CodeMirror editor with SQL syntax highlighting
-		editorView = new EditorView({
-			doc: sqlQuery,
-			extensions: [
-				minimalSetup,
-				sql(),
-				abcdef,
-				EditorView.updateListener.of((update) => {
-					if (update.docChanged) {
-						sqlQuery = update.state.doc.toString();
-					}
-				}),
-				EditorView.theme({
-					'&': {
-						backgroundColor: '#0003 !important',
-						height: '72px',
-						fontSize: '14px'
-					},
-					'.cm-scroller': {
-						overflow: 'auto'
-					}
-				})
-			],
-			parent: editorContainer
-		});
-
 		return () => {
-			editorView?.destroy();
 			db?.close();
 		};
 	});
@@ -119,130 +54,93 @@
 <div class="group/design-root relative flex h-auto min-h-screen w-full flex-col overflow-hidden">
 	<div class="layout-container flex h-full grow flex-col">
 		<Header />
-		<main class="flex flex-1 justify-center p-4 lg:p-10">
-			<div
-				class="@container flex min-h-[600px] w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-[#23482f]"
-			>
-				<div class="flex items-center border-b border-solid border-[#23482f] px-4 py-2">
-					<h3 class="font-pixel text-lg leading-tight font-bold tracking-[-0.015em] text-primary">
-						SQLITE_QUERY_TERMINAL // INTEL_DATABASE
-					</h3>
+		<main class="flex flex-1 flex-col items-center gap-8 p-4 lg:p-10">
+			<!-- Database Loading Error -->
+			{#if error}
+				<div class="w-full max-w-5xl rounded-lg border border-red-500/30 bg-red-950/20 p-4">
+					<p class="font-pixel text-sm text-red-400">DATABASE ERROR: {error}</p>
+					<p class="mt-2 font-pixel text-xs text-gray-400">Please refresh the page to try again.</p>
 				</div>
-				<div class="flex flex-1 flex-col">
-					<div class="space-y-4 p-4">
+			{/if}
 
-						<!-- SQL Query editor -->
-						<div class="flex flex-col gap-2">
-							<div class="flex items-center gap-2">
-								<h4 class="font-pixel text-lg text-primary">QUERY_INPUT</h4>
-								<div class="h-px flex-1 bg-[#23482f]"></div>
-							</div>
-							<div class="flex gap-2">
-								<div class="grow overflow-hidden rounded-lg border border-[#23482f]">
-									<div bind:this={editorContainer}></div>
-								</div>
-								<button
-									onclick={executeQuery}
-									onkeydown={handleKeyDown}
-									disabled={loading || !db}
-									class="flex max-w-[480px] min-w-[84px] cursor-pointer items-center justify-center self-stretch overflow-hidden rounded-lg bg-primary px-4 text-sm leading-normal font-bold tracking-[0.015em] text-[#112217] disabled:cursor-not-allowed disabled:opacity-50"
-								>
-									<span class="truncate">{loading ? 'EXECUTING...' : 'EXECUTE QUERY'}</span>
-								</button>
-							</div>
+			<!-- Part 1 Section -->
+			<section class="w-full max-w-5xl space-y-6">
+				<!-- Part 1 Prose -->
+				<div class="rounded-lg border border-[#23482f] bg-[#0c1a10]/50 p-6">
+					<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // PART 1</h2>
+					<div class="space-y-3 font-mono text-sm text-gray-300">
+						<p>
+							[TODO: Add challenge description for Part 1]
+						</p>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Use the SQL terminal below to investigate the database and find the answer to the first question.
+						</p>
+						<p class="text-primary">
+							→ Submit your answer to unlock Part 2
+						</p>
+					</div>
+				</div>
+
+				<!-- Part 1 Terminal -->
+				<SqlTerminal
+					{db}
+					partNumber={1}
+					answerHash={PART1_ANSWER_HASH}
+					onSolved={handlePart1Solved}
+				/>
+			</section>
+
+			<!-- Part 2 Section (only shown after Part 1 is solved) -->
+			{#if part1Solved}
+				<section class="w-full max-w-5xl space-y-6">
+					<!-- Part 2 Prose -->
+					<div class="rounded-lg border border-[#23482f] bg-[#0c1a10]/50 p-6">
+						<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // PART 2</h2>
+						<div class="space-y-3 font-mono text-sm text-gray-300">
+							<p>
+								[TODO: Add challenge description for Part 2]
+							</p>
+							<p>
+								Excellent work on Part 1! Now dig deeper into the database to uncover the next piece of intelligence.
+							</p>
+							<p class="text-primary">
+								→ Submit your final answer to complete the mission
+							</p>
 						</div>
 					</div>
 
-					<!-- Error display -->
-					{#if error}
-						<div class="mx-4 mb-4 rounded-lg border border-red-500/30 bg-red-950/20 p-3">
-							<p class="font-pixel text-sm text-red-400">ERROR: {error}</p>
-						</div>
-					{/if}
+					<!-- Part 2 Terminal -->
+					<SqlTerminal
+						{db}
+						partNumber={2}
+						answerHash={PART2_ANSWER_HASH}
+						onSolved={handlePart2Solved}
+					/>
+				</section>
+			{/if}
 
-					<!-- Results section -->
-					{#if results !== null}
-						<div class="flex min-h-0 flex-1 flex-col">
-							<div class="flex items-center border-y border-[#23482f] px-4 py-2">
-								<h4 class="font-pixel text-lg text-primary">QUERY_RESULTS</h4>
-								{#if results.length > 0}
-									<span class="ml-auto font-pixel text-sm text-gray-400">
-										RESULT_SETS: {results.length}
-									</span>
-								{/if}
-								{#if executionTime !== null}
-									<span class="font-pixel text-sm text-gray-400 {results.length > 0 ? 'ml-4' : 'ml-auto'}">
-										EXEC_TIME: {executionTime}ms
-									</span>
-								{/if}
-							</div>
-							<div class="min-h-0 flex-1 overflow-auto p-4">
-								{#if results.length === 0}
-									<p class="font-pixel text-sm text-gray-400">
-										Query executed successfully. No rows returned.
-									</p>
-								{:else}
-									{#each results as result, idx}
-										<div class="mb-6 last:mb-0">
-											{#if results.length > 1}
-												<h5 class="mb-2 font-pixel text-base text-primary">
-													Result Set {idx + 1}
-												</h5>
-											{/if}
-											<div class="overflow-x-auto">
-												<table
-													class="w-full border-collapse overflow-hidden rounded-lg border border-[#23482f]"
-												>
-													<thead>
-														<tr class="bg-[#23482f]">
-															{#each result.columns as column}
-																<th
-																	class="border-r border-[#0c1a10] px-4 py-2 text-left font-pixel text-sm text-primary uppercase last:border-r-0"
-																>
-																	{column}
-																</th>
-															{/each}
-														</tr>
-													</thead>
-													<tbody>
-														{#each result.values as row}
-															<tr
-																class="border-t border-[#23482f] transition-colors hover:bg-[#0c1a10]"
-															>
-																{#each row as cell}
-																	<td
-																		class="border-r border-[#23482f]/30 px-4 py-2 font-mono text-sm text-white last:border-r-0"
-																	>
-																		{cell === null ? '(null)' : cell}
-																	</td>
-																{/each}
-															</tr>
-														{/each}
-													</tbody>
-												</table>
-											</div>
-											<p class="mt-2 font-pixel text-xs text-gray-400">
-												{result.values.length} row{result.values.length !== 1 ? 's' : ''}
-												returned
-											</p>
-										</div>
-									{/each}
-								{/if}
-							</div>
+			<!-- Success Message (only shown after Part 2 is solved) -->
+			{#if part2Solved}
+				<section class="w-full max-w-5xl">
+					<div class="rounded-lg border border-green-500/50 bg-green-950/30 p-8 text-center">
+						<h2 class="mb-4 font-pixel text-2xl text-green-400">
+							✓ MISSION COMPLETE
+						</h2>
+						<div class="space-y-3 font-mono text-sm text-gray-300">
+							<p>
+								Congratulations, Agent! You have successfully extracted all critical intelligence from the database.
+							</p>
+							<p class="text-green-400">
+								[TODO: Add final success message and any additional flavor text]
+							</p>
+							<p class="text-gray-400 italic">
+								Your findings have been transmitted to headquarters. Well done.
+							</p>
 						</div>
-					{/if}
-				</div>
-			</div>
+					</div>
+				</section>
+			{/if}
 		</main>
 	</div>
 </div>
 
-<style>
-	:global(.cm-editor) {
-		font-size: 14px;
-	}
-
-	:global(.cm-scroller) {
-		overflow: auto;
-	}
-</style>
