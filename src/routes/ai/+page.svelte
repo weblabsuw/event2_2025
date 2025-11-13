@@ -29,10 +29,45 @@ async function handleMessage(msg, res) {
   // msg: the user's message
   // res: function to call with your response
   //      res(text) - send a text response
-  //      res.tool(name, args) - invoke a tool
+  //      res.tool(name, args) - display a tool call
 
-  // Example: Simple echo
-  res("You said: " + msg);
+  // TODO: Define your tools
+  const tools = [
+    {
+      type: "function",
+      function: {
+        name: "scan_environment",
+        description: "Scan the drone's surroundings",
+        parameters: { type: "object", properties: {} }
+      }
+    }
+  ];
+
+  // TODO: Make API call to /api/v1/ai/chat
+  const response = await fetch("/api/v1/ai/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      messages: [{ role: "user", content: msg }],
+      tools: tools
+    })
+  });
+
+  const data = await response.json();
+
+  // TODO: Handle the response
+  // Check if there are tool calls: data.choices[0].message.tool_calls
+  // Or just text: data.choices[0].message.content
+
+  if (data.choices[0].message.content) {
+    res(data.choices[0].message.content);
+  }
+
+  // Handle tool calls if present
+  if (data.choices[0].message.tool_calls) {
+    const toolCall = data.choices[0].message.tool_calls[0];
+    res.tool(toolCall.function.name, JSON.parse(toolCall.function.arguments));
+  }
 }`;
 
 	function getCurrentTime(): string {
@@ -180,10 +215,10 @@ async function handleMessage(msg, res) {
 	});
 </script>
 
-<div class="group/design-root relative flex h-auto min-h-screen w-full flex-col overflow-hidden">
+<div class="group/design-root relative flex h-screen w-full flex-col overflow-hidden">
 	<div class="layout-container flex h-full grow flex-col">
 		<Header />
-		<main class="grid flex-1 grid-cols-1 gap-4 p-4 lg:grid-cols-2 lg:p-10">
+		<main class="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-hidden p-4 lg:grid-cols-2 lg:p-10">
 			<!-- Chat Interface -->
 			<div
 				class="@container flex min-h-[600px] flex-col overflow-hidden rounded-lg border border-[#23482f] lg:min-h-0"
@@ -293,7 +328,9 @@ async function handleMessage(msg, res) {
 				</div>
 
 				<!-- Code Editor -->
-				<div class="min-h-0 flex-1 overflow-auto" bind:this={editorContainer}></div>
+				<div class="flex min-h-0 flex-1 flex-col">
+					<div class="flex-1 overflow-auto" bind:this={editorContainer}></div>
+				</div>
 
 				<!-- Info Footer -->
 				<div class="border-t border-[#23482f] bg-[#0c1a10] px-4 py-2">

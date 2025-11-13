@@ -41,8 +41,20 @@
 	 */
 	// "vars": { "MY_VARIABLE": "production_value" }
 	/**
-	 * Note: Use secrets to store sensitive data.
+	 * Secrets (Sensitive Data)
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
+	 *
+	 * For the AI station, set the OpenAI API key as a secret:
+	 *
+	 * Production deployment:
+	 *   wrangler secret put OPENAI_API_KEY
+	 *
+	 * Local development:
+	 *   Create a .dev.vars file with:
+	 *   OPENAI_API_KEY=sk-proj-...your-key-here...
+	 *
+	 * Required secrets:
+	 *   - OPENAI_API_KEY: OpenAI API key for GPT-4.1 nano model
 	 */
 	/**
 	 * Static Assets

@@ -43,6 +43,7 @@
 		"@codemirror/view": "^6.38.6",
 		"@fsegurai/codemirror-theme-abcdef": "^6.2.2",
 		"codemirror": "^6.0.2",
+		"openai": "^6.8.1",
 		"sql.js": "^1.13.0"
 	},
 	"resolutions": {
