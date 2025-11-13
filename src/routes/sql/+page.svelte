@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import initSqlJs, { type Database } from 'sql.js';
 	import Header from '$lib/components/Header.svelte';
 	import SqlTerminal from '$lib/components/SqlTerminal.svelte';
@@ -8,9 +8,11 @@
 	let error = $state<string | null>(null);
 	let part1Solved = $state(false);
 	let part2Solved = $state(false);
+	let part2Element: HTMLElement;
+	let successElement: HTMLElement;
 
-	const PART1_ANSWER_HASH = '3F0214FEB4E0C5D2BD49E2E5B208469170D1CE1BA189BBA78835673F6C89C08D';
-	const PART2_ANSWER_HASH = '5D09E7544B3869EAF4DAF14D4411D77D4C2F903113BF39ED92AC9BA7622B8AAD';
+	const PART1_ANSWER_HASH = '3F0214FEB4E0C5D2BD49E2E5B208469170D1CE1BA189BBA78835673F6C89C08D'.toLowerCase();
+	const PART2_ANSWER_HASH = '5D09E7544B3869EAF4DAF14D4411D77D4C2F903113BF39ED92AC9BA7622B8AAD'.toLowerCase();
 
 	async function loadDatabase() {
 		error = null;
@@ -34,12 +36,24 @@
 		}
 	}
 
-	function handlePart1Solved() {
+	async function handlePart1Solved() {
 		part1Solved = true;
+		// Wait for DOM to update
+		await tick();
+		// Small delay to allow fade-in animation to start
+		setTimeout(() => {
+			part2Element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}, 100);
 	}
 
-	function handlePart2Solved() {
+	async function handlePart2Solved() {
 		part2Solved = true;
+		// Wait for DOM to update
+		await tick();
+		// Small delay to allow fade-in animation to start
+		setTimeout(() => {
+			successElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}, 100);
 	}
 
 	onMount(() => {
@@ -92,7 +106,7 @@
 
 			<!-- Part 2 Section (only shown after Part 1 is solved) -->
 			{#if part1Solved}
-				<section class="w-full max-w-5xl space-y-6">
+				<section bind:this={part2Element} class="w-full max-w-5xl space-y-6 animate-fadeIn">
 					<!-- Part 2 Prose -->
 					<div class="rounded-lg border border-[#23482f] bg-[#0c1a10]/50 p-6">
 						<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // PART 2</h2>
@@ -121,7 +135,7 @@
 
 			<!-- Success Message (only shown after Part 2 is solved) -->
 			{#if part2Solved}
-				<section class="w-full max-w-5xl">
+				<section bind:this={successElement} class="w-full max-w-5xl animate-fadeIn">
 					<div class="rounded-lg border border-green-500/50 bg-green-950/30 p-8 text-center">
 						<h2 class="mb-4 font-pixel text-2xl text-green-400">
 							✓ MISSION COMPLETE
@@ -143,4 +157,21 @@
 		</main>
 	</div>
 </div>
+
+<style>
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	:global(.animate-fadeIn) {
+		animation: fadeIn 1.2s ease-out forwards;
+	}
+</style>
 

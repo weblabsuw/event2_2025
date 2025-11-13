@@ -17,6 +17,7 @@
 	let sqlQuery = $state('SELECT * FROM sqlite_master WHERE type="table";');
 	let results = $state<QueryExecResult[] | null>(null);
 	let error = $state<string | null>(null);
+	let answerError = $state<string | null>(null);
 	let loading = $state(false);
 	let executionTime = $state<number | null>(null);
 	let editorContainer: HTMLDivElement;
@@ -31,25 +32,26 @@
 		const hashBuffer = await crypto.subtle.digest('SHA-256', data);
 		const hashArray = Array.from(new Uint8Array(hashBuffer));
 		const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+		console.log(hashHex);
 		return hashHex;
 	}
 
 	async function submitAnswer() {
 		if (!answer.trim()) {
-			error = 'Please enter an answer';
+			answerError = 'Please enter an answer';
 			return;
 		}
 
-		answerSubmitted = true;
 		const hash = await hashAnswer(answer.trim());
 
 		if (hash === answerHash) {
 			answerCorrect = true;
-			error = null;
+			answerSubmitted = true;
+			answerError = null;
 			onSolved?.();
 		} else {
 			answerCorrect = false;
-			error = 'Incorrect answer. Keep investigating!';
+			answerError = 'Incorrect answer. Keep investigating!';
 		}
 	}
 
@@ -95,7 +97,7 @@
 	}
 
 	function handleAnswerKeyDown(e: KeyboardEvent) {
-		if (e.key === 'Enter' && !answerSubmitted) {
+		if (e.key === 'Enter' && !answerCorrect) {
 			submitAnswer();
 		}
 	}
@@ -134,7 +136,7 @@
 </script>
 
 <div
-	class="@container flex min-h-[600px] w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-[#23482f]"
+	class="@container flex min-h-[400px] w-full max-w-5xl flex-col overflow-hidden rounded-lg border border-[#23482f]"
 >
 	<div class="flex items-center border-b border-solid border-[#23482f] px-4 py-2">
 		<h3 class="font-pixel text-lg leading-tight font-bold tracking-[-0.015em] text-primary">
@@ -153,18 +155,18 @@
 					type="text"
 					bind:value={answer}
 					onkeydown={handleAnswerKeyDown}
-					disabled={answerSubmitted}
+					disabled={answerCorrect}
 					placeholder="Enter your answer here..."
 					class="flex-1 rounded-lg border border-[#23482f] bg-[#0c1a10] px-4 py-2 font-mono text-sm text-white placeholder-gray-500 focus:border-primary focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
 				/>
 				<button
 					onclick={submitAnswer}
-					disabled={answerSubmitted || !answer.trim()}
+					disabled={answerCorrect || !answer.trim()}
 					class="flex max-w-[480px] min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-4 py-2 text-sm leading-normal font-bold tracking-[0.015em] text-[#112217] disabled:cursor-not-allowed disabled:opacity-50"
 				>
 					<span class="truncate">
-						{#if answerSubmitted}
-							{answerCorrect ? '✓ CORRECT' : '✗ INCORRECT'}
+						{#if answerCorrect}
+							✓ CORRECT
 						{:else}
 							SUBMIT
 						{/if}
@@ -174,6 +176,11 @@
 			{#if answerCorrect}
 				<div class="rounded-lg border border-green-500/30 bg-green-950/20 p-3">
 					<p class="font-pixel text-sm text-green-400">✓ Correct! You may proceed.</p>
+				</div>
+			{/if}
+			{#if answerError}
+				<div class="rounded-lg border border-red-500/30 bg-red-950/20 p-3">
+					<p class="font-pixel text-sm text-red-400">ERROR: {answerError}</p>
 				</div>
 			{/if}
 		</div>
