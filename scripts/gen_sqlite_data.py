@@ -23,8 +23,8 @@ import math
 import sys
 
 # --- Config ---
-JSON_PATH = "src/lib/api/weapons.json"
-OUT_DB = "static/data.sqlite"
+JSON_PATH = "../src/lib/api/weapons.json"
+OUT_DB = "../static/data.sqlite"
 START = datetime(2025, 9, 1, tzinfo=timezone.utc)
 END = datetime(2025, 11, 13, 14, 59, 59, tzinfo=timezone.utc)
 RANDOM_SEED = 42
