@@ -42,7 +42,7 @@
 			return;
 		}
 
-		const hash = await hashAnswer(answer.trim());
+		const hash = await hashAnswer(answer.trim().toLowerCase());
 
 		if (hash === answerHash) {
 			answerCorrect = true;

@@ -21,3 +21,46 @@
 body {
   @apply bg-background-dark font-sans text-gray-200;
 }
+
+/* Inline code styling (Notion-inspired, theme-adapted) */
+code.code-inline {
+  @apply font-mono;
+  font-size: 0.95em; /* Slightly reduced like Notion */
+  background: linear-gradient(180deg, rgba(19,236,91,0.10), rgba(19,236,91,0.06));
+  color: var(--color-primary);
+  padding: 0.15rem 0.4rem;
+  border-radius: 5px;
+  border: 1px solid rgba(19,236,91,0.25);
+  line-height: 1.25;
+  white-space: nowrap; /* Prevent awkward wraps (Notion behavior) */
+  position: relative;
+}
+
+/* Allow wrapping when inside elements that explicitly opt-in */
+.wrap-inline-code code.code-inline { white-space: normal; }
+
+/* Improve contrast in very dark theme on hover/focus for accessibility */
+code.code-inline:hover, code.code-inline:focus {
+  background: linear-gradient(180deg, rgba(19,236,91,0.16), rgba(19,236,91,0.10));
+  border-color: rgba(19,236,91,0.35);
+}
+
+/* Selection colors inside inline code */
+code.code-inline::selection {
+  background: rgba(19,236,91,0.35);
+  color: #102216; /* dark text for readability during selection */
+}
+
+/* Optional dark subtle shadow for depth */
+code.code-inline {
+  box-shadow: inset 0 0 0 1px rgba(19,236,91,0.18), 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* High contrast mode (if user sets forced-colors) */
+@media (forced-colors: active) {
+  code.code-inline {
+    border: 1px solid ButtonText;
+    background: Canvas;
+    color: ButtonText;
+  }
+}

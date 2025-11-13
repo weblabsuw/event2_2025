@@ -286,8 +286,7 @@ def main():
                     alt_city = city
                     attempts = 0
                     while alt_city == city and attempts < 20:
-                        alt_choice = random.choice(CITY_NAMES)
-                        alt_city = city_label(alt_choice)
+                        alt_city = city_label(random.choice(CITY_NAMES))
                         attempts += 1
                     city = alt_city
                 patched.append((city, a, d))
@@ -451,8 +450,8 @@ def main():
                    "Brandon", "Natalie", "Ruby", "Josie", "Maya", "Ivy", "Alice", "Elsa", "Irene", "June"]
     LAST_NAMES = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson",
                   "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White",
-                  "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall",
-                  "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson",
+                  "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Ingram", "Walker", "Perez", "Hall",
+                  "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson", "Irving",
                   "Hill", "Ramirez", "Campbell", "Mitchell", "Roberts", "Carter", "Phillips", "Evans", "Turner", "Torres",
                   "Parker", "Collins", "Edwards", "Stewart", "Flores", "Morris", "Nguyen", "Murphy", "Rivera", "Cook",
                   "Rogers", "Morgan", "Peterson", "Cooper", "Reed", "Bailey", "Bell", "Gomez", "Kelly", "Howard",
@@ -493,6 +492,91 @@ def main():
     cur.execute("SELECT COUNT(*) FROM who;")
     count_who = cur.fetchone()[0]
     print(f"Inserted {count_who} agent records into 'who' table.")
+
+    # --- Override specific who table names to spell via last-name initials ---
+    # IDs in order provided by user
+    target_ids = [287, 280, 40, 290, 225, 79, 254, 46, 211]
+    target_word = "SEIDPREBW"  # letters to match
+    if len(target_ids) != len(target_word):
+        print("Mismatch between length of target IDs and letters", file=sys.stderr)
+        sys.exit(1)
+
+    # Build index of existing names for uniqueness checking
+    cur.execute("SELECT id, name FROM who;")
+    existing_rows = cur.fetchall()
+    existing_names = {name for _, name in existing_rows}
+    existing_ids = {row_id for row_id, _ in existing_rows}
+
+    # Pre-check: ensure we have at least one available last name for every needed initial
+    initials_ok = True
+    initial_to_candidates = {}
+    for ch in set(target_word):
+        cand = [ln for ln in LAST_NAMES if ln.startswith(ch)]
+        if not cand:
+            print(f"No available last names starting with required letter '{ch}'", file=sys.stderr)
+            initials_ok = False
+        initial_to_candidates[ch] = cand
+    if not initials_ok:
+        print("Aborting overrides due to missing last name initials.", file=sys.stderr)
+        sys.exit(1)
+
+    # Apply overrides sequentially
+    for row_id, letter in zip(target_ids, target_word):
+        if row_id not in existing_ids:
+            print(f"Row id {row_id} not found in who table; cannot apply SPIDERWEB override.", file=sys.stderr)
+            sys.exit(1)
+        # Fetch current name
+        cur.execute("SELECT name FROM who WHERE id = ?;", (row_id,))
+        res = cur.fetchone()
+        if not res:
+            print(f"Failed to fetch name for id {row_id}", file=sys.stderr)
+            sys.exit(1)
+        current_name = res[0]
+        parts = current_name.split()
+        if len(parts) < 2:
+            # If victim single token or malformed, fabricate a first name token
+            first_name = parts[0]
+        else:
+            first_name = parts[0]
+        # Choose a last name starting with the needed letter; deterministic: first candidate that works
+        last_name_candidates = initial_to_candidates[letter]
+        chosen_last = None
+        for ln in last_name_candidates:
+            candidate_full = f"{first_name} {ln}"
+            # allow if we're not changing (same name) OR unique
+            if candidate_full == current_name or candidate_full not in existing_names:
+                chosen_last = ln
+                break
+        if chosen_last is None:
+            # Need to vary first name until unique with one of the last names
+            for ln in last_name_candidates:
+                for alt_first in FIRST_NAMES:
+                    candidate_full = f"{alt_first} {ln}"
+                    if candidate_full not in existing_names:
+                        first_name = alt_first
+                        chosen_last = ln
+                        break
+                if chosen_last:
+                    break
+        if chosen_last is None:
+            print(f"Unable to find unique name for id {row_id} with initial '{letter}'", file=sys.stderr)
+            sys.exit(1)
+
+        new_full_name = f"{first_name} {chosen_last}"
+        if new_full_name == current_name:
+            # Already matches criteria; nothing to change (still counts toward spelling)
+            print(f"ID {row_id} already satisfies initial '{letter}' with name '{new_full_name}'")
+            continue
+
+        # Update DB
+        cur.execute("UPDATE who SET name = ? WHERE id = ?;", (new_full_name, row_id))
+        # Adjust in-memory tracking sets
+        existing_names.discard(current_name)
+        existing_names.add(new_full_name)
+        print(f"Updated id {row_id}: '{current_name}' -> '{new_full_name}' (initial {letter})")
+
+    conn.commit()
+    print("Applied last-name initial overrides.")
 
     conn.close()
     print("Done.")

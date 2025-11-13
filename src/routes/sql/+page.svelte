@@ -11,8 +11,8 @@
 	let part2Element: HTMLElement;
 	let successElement: HTMLElement;
 
-	const PART1_ANSWER_HASH = '3F0214FEB4E0C5D2BD49E2E5B208469170D1CE1BA189BBA78835673F6C89C08D'.toLowerCase();
-	const PART2_ANSWER_HASH = '5D09E7544B3869EAF4DAF14D4411D77D4C2F903113BF39ED92AC9BA7622B8AAD'.toLowerCase();
+	const PART1_ANSWER_HASH = 'E05DB9B6C2E45A34D0C63617C91F950E28FF4D2326E63AA10A91E86CDE2E2802'.toLowerCase();
+	const PART2_ANSWER_HASH = '234D28249B180616D49E22FD57F26EE1ABE04B63565812D65470FF881E854683'.toLowerCase();
 
 	async function loadDatabase() {
 		error = null;
@@ -84,10 +84,22 @@
 					<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // PART 1</h2>
 					<div class="space-y-3 font-mono text-sm text-gray-300">
 						<p>
-							[TODO: Add challenge description for Part 1]
+							To keep tabs on the whereabouts of our agents, we maintain a record of flight logs in the <b>Flight Ledger Yard</b>, or F.L.Y. for short.
+							Each flight log in F.L.Y. contains the agent’s social security number, city, time of arrival, and time of departure to/from our major spy hubs.
+							In addition to past flights, F.L.Y. also maintains data on upcoming flights so that we can manage the assignments of our agents, so you will need to be careful when processing the data.
 						</p>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Use the SQL terminal below to investigate the database and find the answer to the first question.
+							<u>Your task is simple</u>: Determine what city Agent Web was located in at the time of his last ping to our headquarters.
+						</p>
+						<p class="mb-1">
+							Here is some information that may be helpful in your endeavors:
+						</p>
+						<ul class="list-disc">
+							<li class="ml-4"><b>Agent Web's Social Security Number</b>: <code class="code-inline">002-05-1849</code></li>
+							<li class="ml-4"><b>Agent Web's Last Ping Time</b>: <code class="code-inline">2025-10-08T20:37:00Z</code></li>
+						</ul>
+						<p>
+							Good luck!
 						</p>
 						<p class="text-primary">
 							→ Submit your answer to unlock Part 2
@@ -112,10 +124,20 @@
 						<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // PART 2</h2>
 						<div class="space-y-3 font-mono text-sm text-gray-300">
 							<p>
-								[TODO: Add challenge description for Part 2]
+								Great work, Agent!
 							</p>
 							<p>
-								Excellent work on Part 1! Now dig deeper into the database to uncover the next piece of intelligence.
+								Now that you have determined the city that Agent Web was last seen in, it’s time to construct a list of suspects.
+								Each of our agents has an entry in the <b>Worldwide Human Operatives database</b>, or W.H.O. for short, that contains information
+								like name, social security number, height, eye color, and weight.
+							</p>
+							<p>
+								Combining the information about the city and last ping time and still using F.L.Y.,
+								generate a list of the agents who were in the same city as Agent Web when he went dark.
+								To check your work, when sorting by name in ascending order, what does the first letter of each suspect’s last name spell out?
+							</p>
+							<p class="text-gray-400 italic">
+								Note down the names of the suspects to use for later!
 							</p>
 							<p class="text-primary">
 								→ Submit your final answer to complete the mission
@@ -141,14 +163,16 @@
 							✓ MISSION COMPLETE
 						</h2>
 						<div class="space-y-3 font-mono text-sm text-gray-300">
+							<p class="text-gray-400 italic">
+								Your findings have been transmitted to headquarters.
+							</p>
 							<p>
-								Congratulations, Agent! You have successfully extracted all critical intelligence from the database.
+								Amazing job, Agent! You've successfully narrowed in on the general whereabouts of Agent Web
+								and a list of suspects that were in the same area at the time of his demise.
 							</p>
 							<p class="text-green-400">
-								[TODO: Add final success message and any additional flavor text]
-							</p>
-							<p class="text-gray-400 italic">
-								Your findings have been transmitted to headquarters. Well done.
+								Continue on to the next pieces of the puzzle, or combine your puzzle solutions
+								to solve the mystery!
 							</p>
 						</div>
 					</div>
