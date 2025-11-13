@@ -3,7 +3,7 @@
 gen_sqlite_data.py
 
 Behavior:
-- Reads: src/lib/api/weapons.json (expects list of objects with "clearance" lists of SSNs)
+- Reads: scripts/agent_ssns.json (expects a JSON array of SSN strings)
 - Produces: ./data.sqlite
 - Schema: fly(agent_ssn TEXT, city TEXT, arrival_time TEXT, departure_time TEXT)
 - Generates itineraries for each SSN in the JSON between 2025-09-01 and 2025-11-13.
@@ -23,7 +23,7 @@ import math
 import sys
 
 # --- Config ---
-JSON_PATH = "../src/lib/api/weapons.json"
+JSON_PATH = "agent_ssns.json"
 OUT_DB = "../static/data.sqlite"
 START = datetime(2025, 9, 1, tzinfo=timezone.utc)
 END = datetime(2025, 11, 13, 14, 59, 59, tzinfo=timezone.utc)
@@ -50,14 +50,20 @@ def load_unique_ssns(json_path):
         raise FileNotFoundError(f"Could not find JSON file at: {json_path}")
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    ssns = set()
-    for item in data:
-        clears = item.get("clearance", [])
-        if isinstance(clears, list):
-            for s in clears:
-                if isinstance(s, str) and s.strip():
-                    ssns.add(s.strip())
-    return sorted(ssns)
+    if not isinstance(data, list):
+        raise ValueError("agent_ssns.json must be a JSON array of SSN strings")
+    ssns = []
+    for s in data:
+        if isinstance(s, str) and s.strip():
+            ssns.append(s.strip())
+    # remove duplicates while preserving order
+    seen = set()
+    ordered_unique = []
+    for s in ssns:
+        if s not in seen:
+            seen.add(s)
+            ordered_unique.append(s)
+    return ordered_unique
 
 def haversine_km(lat1, lon1, lat2, lon2):
     R = 6371.0
