@@ -12,17 +12,10 @@
 	let error = $state<string | null>(null);
 	let loading = $state(false);
 	let executionTime = $state<number | null>(null);
-	let fileName = $state<string | null>(null);
 	let editorContainer: HTMLDivElement;
 	let editorView: EditorView | null = null;
-	let fileInput: HTMLInputElement;
 
-	async function handleFileUpload(event: Event) {
-		const target = event.target as HTMLInputElement;
-		const file = target.files?.[0];
-		if (!file) return;
-
-		fileName = file.name;
+	async function loadDatabase() {
 		error = null;
 
 		try {
@@ -30,22 +23,23 @@
 				locateFile: (file: string) => `https://sql.js.org/dist/${file}`
 			});
 
-			const arrayBuffer = await file.arrayBuffer();
+			const response = await fetch('/data.sqlite');
+			if (!response.ok) {
+				throw new Error(`Failed to load database: ${response.statusText}`);
+			}
+
+			const arrayBuffer = await response.arrayBuffer();
 			const uint8Array = new Uint8Array(arrayBuffer);
 			db = new SQL.Database(uint8Array);
-
-			// Clear previous results
-			results = null;
 		} catch (err) {
 			error = err instanceof Error ? err.message : String(err);
 			db = null;
-			fileName = null;
 		}
 	}
 
 	function executeQuery() {
 		if (!db) {
-			error = 'Please upload a SQLite database file first';
+			error = 'Database not loaded. Please refresh the page.';
 			return;
 		}
 
@@ -86,6 +80,9 @@
 	}
 
 	onMount(() => {
+		// Load the database
+		loadDatabase();
+
 		// Initialize CodeMirror editor with SQL syntax highlighting
 		editorView = new EditorView({
 			doc: sqlQuery,
@@ -133,31 +130,6 @@
 				</div>
 				<div class="flex flex-1 flex-col">
 					<div class="space-y-4 p-4">
-						<!-- File upload section -->
-						<div class="flex flex-col gap-2">
-							<div class="flex items-center gap-2">
-								<h4 class="font-pixel text-lg text-primary">DATABASE_FILE</h4>
-								<div class="h-px flex-1 bg-[#23482f]"></div>
-							</div>
-							<div class="flex items-center gap-2">
-								<input
-									bind:this={fileInput}
-									type="file"
-									accept=".sqlite,.db,.sqlite3,.db3"
-									onchange={handleFileUpload}
-									class="hidden"
-								/>
-								<button
-									onclick={() => fileInput.click()}
-									class="flex h-12 cursor-pointer items-center justify-center rounded-lg bg-[#23482f] px-4 text-sm leading-normal font-bold tracking-[0.015em] text-primary transition-colors hover:bg-[#2d5a3d]"
-								>
-									{fileName ? 'CHANGE FILE' : 'UPLOAD DATABASE'}
-								</button>
-								{#if fileName}
-									<span class="font-pixel text-base text-white">{fileName}</span>
-								{/if}
-							</div>
-						</div>
 
 						<!-- SQL Query editor -->
 						<div class="flex flex-col gap-2">
