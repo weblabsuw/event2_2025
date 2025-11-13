@@ -25,8 +25,16 @@ export const GET: RequestHandler = async () => {
 			page_parameter: 'page (1-indexed)',
 			example: 'GET /api/v1/web/surveillance/{uuid}?page=1'
 		},
+		data_encoding: {
+			format: 'Base64',
+			note: 'Surveillance data is Base64-encoded. Decode the "data" field to get JSON array of entries.',
+			decoding_example: {
+				javascript: 'JSON.parse(atob(response.data))',
+				python: 'json.loads(base64.b64decode(response["data"]))'
+			}
+		},
 		workflow:
-			'1. Get suspect UUIDs from /api/v1/web/suspects\n2. For each UUID, paginate through surveillance logs\n3. Look for suspicious activity entries',
+			'1. Get suspect UUIDs from /api/v1/web/suspects\n2. For each UUID, paginate through surveillance logs\n3. Decode Base64 data to JSON\n4. Look for entries with suspicious=true',
 		note: 'Each suspect has 12-18 pages of surveillance data. Students should write scripts to paginate through all pages for all suspects.'
 	});
 };

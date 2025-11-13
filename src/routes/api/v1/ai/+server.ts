@@ -1,5 +1,5 @@
 import { apiResponse } from '$lib/api/utils';
-import { AI_CONFIG, EXPECTED_TOOLS } from '$lib/api/ai-config';
+import { AI_CONFIG } from '$lib/api/ai-config';
 import type { RequestHandler } from './$types';
 
 /**
@@ -28,13 +28,8 @@ export const GET: RequestHandler = async () => {
 		},
 		tools: {
 			description:
-				'Define these tools in your API request to extract encoded sensor data from the drone',
+				'Define tools in your API request to extract encoded sensor data from the drone',
 			required: true,
-			expected_tools: EXPECTED_TOOLS.map((tool) => ({
-				name: tool.function.name,
-				description: tool.function.description,
-				parameters: tool.function.parameters
-			})),
 			note: 'All environmental data is returned in encoded formats (hex/base64). You must decode it client-side.'
 		},
 		instructions: [

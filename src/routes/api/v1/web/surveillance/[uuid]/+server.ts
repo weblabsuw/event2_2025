@@ -1,10 +1,11 @@
 import { apiResponse, apiError } from '$lib/api/utils';
-import { getSurveillancePage, getSuspectInfo } from '$lib/api/web-data';
+import { getSurveillancePageEncoded, getSuspectInfo } from '$lib/api/web-data';
 import type { RequestHandler } from './$types';
 
 /**
  * W.E.B. Surveillance Logs Endpoint
  * Returns paginated surveillance entries for a specific suspect
+ * Data is Base64-encoded and must be decoded by the client
  */
 export const GET: RequestHandler = async ({ params, url }) => {
 	const { uuid } = params;
@@ -26,8 +27,8 @@ export const GET: RequestHandler = async ({ params, url }) => {
 		return apiError('Suspect UUID not found in surveillance system', 404);
 	}
 
-	// Get the requested page
-	const pageData = getSurveillancePage(uuid, page);
+	// Get the requested page (Base64 encoded)
+	const pageData = getSurveillancePageEncoded(uuid, page);
 	if (!pageData) {
 		return apiError(
 			`Invalid page number. Suspect has ${suspectInfo.pages} pages (requested page ${page})`,
@@ -47,7 +48,8 @@ export const GET: RequestHandler = async ({ params, url }) => {
 			has_next: pageData.current_page < pageData.total_pages,
 			has_previous: pageData.current_page > 1
 		},
-		data: pageData.entries,
-		note: 'Look for entries with suspicious=true to identify weapons transactions'
+		data: pageData.encoded_data,
+		encoding: 'base64',
+		note: 'Data is Base64-encoded. Decode to JSON, then look for entries with suspicious=true'
 	});
 };

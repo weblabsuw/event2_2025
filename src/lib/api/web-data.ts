@@ -76,6 +76,28 @@ export function getSurveillancePage(
 }
 
 /**
+ * Get a specific page of surveillance entries encoded as Base64
+ * Students must decode the Base64 string to access the JSON data
+ */
+export function getSurveillancePageEncoded(
+	uuid: string,
+	page: number
+): { encoded_data: string; total_pages: number; current_page: number } | null {
+	const pageData = getSurveillancePage(uuid, page);
+	if (!pageData) return null;
+
+	// Encode the entries array as Base64
+	const jsonString = JSON.stringify(pageData.entries);
+	const base64Data = Buffer.from(jsonString, 'utf-8').toString('base64');
+
+	return {
+		encoded_data: base64Data,
+		total_pages: pageData.total_pages,
+		current_page: pageData.current_page
+	};
+}
+
+/**
  * Get all suspects with their basic info
  */
 export function getAllSuspects(): Array<{ uuid: string; name: string; pages: number }> {

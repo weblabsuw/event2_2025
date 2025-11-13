@@ -14,7 +14,6 @@ export const GET: RequestHandler = async () => {
 		count: suspects.length,
 		suspects: suspects.map((s) => ({
 			uuid: s.uuid,
-			name: s.name,
 			pages: s.pages
 		})),
 		note: 'Use the uuid to query /api/v1/web/surveillance/{uuid}?page=N for surveillance logs'
