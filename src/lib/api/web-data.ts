@@ -1,98 +1,87 @@
 /**
- * W.E.B. Inventory System Data
- * Wow! Everything Box
+ * W.E.B. Protocol Data
+ * Worldwide Evidence Bureau
  *
- * Stores one base list of 250 weapons, encodes to Base64 at runtime
+ * Provides surveillance monitoring data for SPIDER suspects.
+ * Each suspect has paginated surveillance logs containing routine
+ * observations and one suspicious weapon purchase.
  */
 
-import baseWeapons from './weapons.json';
+import surveillanceData from './surveillance-data.json';
 
-export type WeaponData = {
-	weapon_type: string;
-	clearance: string[]; // Array of agent SSNs with clearance for this weapon
+export type SurveillanceEntry = {
+	timestamp: string;
+	activity: string;
+	suspicious: boolean;
+	manufacturer?: string; // Only present when suspicious=true
 };
 
-export type InventoryItem = {
-	id: string;
-	data: string; // Base64 encoded JSON of WeaponData
+export type SuspectSurveillance = {
+	name: string;
+	pages: number;
+	entries: SurveillanceEntry[];
 };
 
-export const CITIES: string[] = [
-	"New York, United States",
-	"London, United Kingdom",
-	"Paris, France",
-	"Moscow, Russia",
-	"Beijing, China",
-	"Shanghai, China",
-	"Dubai, United Arab Emirates",
-	"Istanbul, Turkey",
-	"Tokyo, Japan",
-	"Hong Kong, China",
-	"Sao Paulo, Brazil",
-	"Mexico City, Mexico",
-	"Los Angeles, United States",
-	"Mumbai, India",
-	"Cairo, Egypt",
-	"Berlin, Germany",
-	"Singapore, Singapore",
-	"Sydney, Australia",
-	"Rome, Italy",
-	"Seoul, South Korea"
-];
+export const ENTRIES_PER_PAGE = 10;
 
-// Special weapon that only appears in New York inventory
-// This is the murder weapon - SSN should match one from SPIDER data
-const NY_SPECIAL_WEAPON: WeaponData = {
-	weapon_type: 'Nano-Toxin Injector',
-	clearance: ['']
-};
+// W.E.B. API Key (for consistency with SPIDER protocol)
+export const WEB_API_KEY = 'WEB-CLEARANCE-BETA-3';
 
 /**
- * Helper to encode weapon data to Base64
+ * Get list of all suspect UUIDs in the surveillance system
  */
-export function encodeWeaponData(data: WeaponData): string {
-	return btoa(JSON.stringify(data));
+export function getSuspectUUIDs(): string[] {
+	return Object.keys(surveillanceData);
 }
 
 /**
- * Helper to decode weapon data from Base64
- * Students will implement this in JavaScript
+ * Get surveillance info for a specific suspect
  */
-export function decodeWeaponData(encoded: string): WeaponData {
-	return JSON.parse(atob(encoded));
+export function getSuspectInfo(uuid: string): { name: string; pages: number } | null {
+	const data = surveillanceData[uuid as keyof typeof surveillanceData];
+	if (!data) return null;
+
+	return {
+		name: data.name,
+		pages: data.pages
+	};
 }
 
 /**
- * Get inventory for a specific city
- * For New York, injects special weapon at page 16 (index 155)
+ * Get a specific page of surveillance entries for a suspect
+ * Pages are 1-indexed (page 1 is the first page)
  */
-export function getCityInventory(city: string): InventoryItem[] {
-	const weapons = [...(baseWeapons as WeaponData[])];
+export function getSurveillancePage(
+	uuid: string,
+	page: number
+): { entries: SurveillanceEntry[]; total_pages: number; current_page: number } | null {
+	const data = surveillanceData[uuid as keyof typeof surveillanceData];
+	if (!data) return null;
 
-	// For New York, inject the special weapon at index 155 (page 16, 6th item)
-	if (city === 'New York') {
-		weapons.splice(155, 0, NY_SPECIAL_WEAPON);
+	const startIndex = (page - 1) * ENTRIES_PER_PAGE;
+	const endIndex = startIndex + ENTRIES_PER_PAGE;
+
+	// Validate page number
+	if (page < 1 || page > data.pages) {
+		return null;
 	}
 
-	// Convert to inventory items with Base64 encoding
-	return weapons.map((weapon, index) => {
-		const cityCode = city
-			.split(' ')
-			.map((w) => w.substring(0, 3).toUpperCase())
-			.join('');
-		const itemId = `WPN-${cityCode}-${String(index + 1).padStart(4, '0')}`;
+	const entries = data.entries.slice(startIndex, endIndex);
 
-		return {
-			id: itemId,
-			data: encodeWeaponData(weapon)
-		};
-	});
+	return {
+		entries,
+		total_pages: data.pages,
+		current_page: page
+	};
 }
 
 /**
- * Get total items for a city
+ * Get all suspects with their basic info
  */
-export function getCityItemCount(city: string): number {
-	// New York has one extra item (the special weapon)
-	return city === 'New York' ? 251 : 250;
+export function getAllSuspects(): Array<{ uuid: string; name: string; pages: number }> {
+	return Object.entries(surveillanceData).map(([uuid, data]) => ({
+		uuid,
+		name: data.name,
+		pages: data.pages
+	}));
 }

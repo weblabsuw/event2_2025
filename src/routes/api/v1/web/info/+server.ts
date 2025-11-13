@@ -1,27 +1,32 @@
 import { apiResponse } from '$lib/api/utils';
-import { CITIES } from '$lib/api/web-data';
 import type { RequestHandler } from './$types';
 
 /**
- * W.E.B. Inventory Information Endpoint
- * Public endpoint that explains the inventory system
+ * W.E.B. Protocol Information Endpoint
+ * Public endpoint that explains the surveillance monitoring system
  */
 export const GET: RequestHandler = async () => {
 	return apiResponse({
-		system: 'W.E.B. Inventory System',
-		name: 'Wow! Everything Box',
+		system: 'W.E.B. Protocol',
+		name: 'Worldwide Evidence Bureau',
 		description:
-			'Backup inventory database recovered from secure storage. All weapon data is Base64 encoded to save space in the backup.',
-		available_cities: CITIES,
+			'This system provides surveillance monitoring logs for agents of interest. Use suspect UUIDs to retrieve paginated surveillance data.',
+		authentication: {
+			type: 'None required',
+			note: 'All endpoints are publicly accessible for investigation purposes'
+		},
 		endpoints: {
 			'/api/v1/web/info': 'This endpoint - public system information',
-			'/api/v1/web/cities': 'List of cities with inventory data',
-			'/api/v1/web/inventory': 'View inventory for a specific city (requires city and page params)'
+			'/api/v1/web/suspects': 'List all suspects under surveillance',
+			'/api/v1/web/surveillance/{uuid}': 'Get paginated surveillance logs for a specific suspect'
 		},
-		usage: {
-			inventory_query: 'GET /api/v1/web/inventory?city={city}&page={page}',
-			example: 'GET /api/v1/web/inventory?city=New%20York&page=1'
+		pagination: {
+			entries_per_page: 10,
+			page_parameter: 'page (1-indexed)',
+			example: 'GET /api/v1/web/surveillance/{uuid}?page=1'
 		},
-		note: 'Each city has 250 weapons in inventory (251 for New York). Weapons are paginated with 10 items per page.'
+		workflow:
+			'1. Get suspect UUIDs from /api/v1/web/suspects\n2. For each UUID, paginate through surveillance logs\n3. Look for suspicious activity entries',
+		note: 'Each suspect has 12-18 pages of surveillance data. Students should write scripts to paginate through all pages for all suspects.'
 	});
 };

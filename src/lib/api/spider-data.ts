@@ -6,6 +6,7 @@
 export type TriggeredAgent = {
 	name: string;
 	trigger_time: string; // ISO 8601 timestamp
+	uuid: string;
 	event: string;
 };
 
@@ -33,37 +34,44 @@ export const AGENTS: Agent[] = [
 export const TRIGGERED_AGENTS: TriggeredAgent[] = [
 	{
 		name: "Alice Johnson",
-		trigger_time: '2025-11-07T14:30:00Z',
+		uuid: '5e2cb2bd-477c-41e5-a1e2-200f5d5bbd8a',
+		trigger_time: '2025-10-07T14:22:31Z',
 		event: 'ACCESS_CONFIDENTIAL_FILE'
 	},
 	{
 		name: "Jacob Smith",
-		trigger_time: '2025-11-03T15:00:00Z',
+		uuid: '21d04141-0934-4066-b832-c66c674bcbb5',
+		trigger_time: '2025-10-03T11:15:45Z',
 		event: 'ACCESS_CONFIDENTIAL_FILE'
 	},
 	{
 		name: "Sarah Johnson",
-		trigger_time: '2025-10-30T15:30:00Z',
+		uuid: 'd278c792-e153-4b73-8c84-a9a732c04d50',
+		trigger_time: '2025-09-30T09:34:23Z',
 		event: 'ACCESS_CONFIDENTIAL_FILE'
 	},
 	{
-		name: "Michael Brown",
-		trigger_time: '2025-10-28T16:00:00Z',
+		name: "Emma Ingraham",
+		uuid: 'a581c267-a027-4599-abef-7c8f4fd4bbbb',
+		trigger_time: '2025-09-28T16:23:45Z',
 		event: 'ACCESS_CONFIDENTIAL_FILE'
 	},
 	{
 		name: "David Wilson",
-		trigger_time: '2025-10-20T16:30:00Z',
+		uuid: '20008085-019b-41f3-87f1-8e4db70a691d',
+		trigger_time: '2025-09-20T16:48:09Z',
 		event: 'ACCESS_CONFIDENTIAL_FILE'
 	},
 	{
 		name: "Emily Davis",
-		trigger_time: '2025-10-11T17:00:00Z',
+		uuid: 'ee4038bd-0b9c-4a95-971d-08d14fd01852',
+		trigger_time: '2025-09-14T17:12:10Z',
 		event: 'ACCESS_CONFIDENTIAL_FILE'
 	},
 	{
-		name: "James Miller",
-		trigger_time: '2025-10-08T17:30:00Z',
+		name: "Tunnel Bob",
+		uuid: '7c62549c-3f57-4bd6-a176-ec48d43c2b34',
+		trigger_time: '2001-09-11T17:32:12Z',
 		event: 'ACCESS_CONFIDENTIAL_FILE'
 	}
 ];
