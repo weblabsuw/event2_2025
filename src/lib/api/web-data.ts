@@ -44,7 +44,7 @@ export const CITIES: string[] = [
 // This is the murder weapon - SSN should match one from SPIDER data
 const NY_SPECIAL_WEAPON: WeaponData = {
 	weapon_type: 'Nano-Toxin Injector',
-	clearance: ['
+	clearance: ['']
 };
 
 /**
