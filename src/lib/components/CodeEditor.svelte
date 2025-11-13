@@ -10,13 +10,17 @@
 	let hasError = $state(false);
 	let executing = $state(false);
 
-	const initialCode = `// Example: Decode Base64 weapon data
-const encoded = "eyJ3ZWFwb25fdHlwZSI6IlBhcnRpY2xlIEJlYW0iLCJjbGVhcmFuY2UiOlsiMTIzLTQ1LTY3ODkiXX0=";
-const decoded = atob(encoded);
-const weapon = JSON.parse(decoded);
-console.log(weapon);`;
+	const initialCode = `// Example: Fetch and decode surveillance data
+const response = await fetch('/api/v1/web/suspects');
+const data = await response.json();
+console.log(data.suspects);
 
-	function executeCode() {
+// Example: Decode Base64 data
+const encoded = "eyJ0aW1lc3RhbXAiOiIyMDI1LTA5LTAxVDA2OjQ5OjMwLjI5M1oiLCJhY3Rpdml0eSI6InB1bXBpbmcgZ2FzIiwic3VzcGljaW91cyI6ZmFsc2V9";
+const decoded = JSON.parse(atob(encoded));
+console.log('Decoded entry:', decoded);`;
+
+	async function executeCode() {
 		if (!editorView) return;
 
 		executing = true;
@@ -48,8 +52,12 @@ console.log(weapon);`;
 		};
 
 		try {
-			// Execute the code
-			const result = eval(code);
+			// Wrap code in an async function to support await
+			const AsyncFunction = async function () {}.constructor as FunctionConstructor;
+			const asyncFn = AsyncFunction(code);
+
+			// Execute the async code and wait for completion
+			const result = await asyncFn();
 
 			// Restore console methods
 			console.log = originalLog;
