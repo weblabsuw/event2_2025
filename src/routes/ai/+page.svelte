@@ -215,7 +215,7 @@ async function handleMessage(msg, res) {
 	});
 </script>
 
-<div class="group/design-root relative flex h-screen w-full flex-col overflow-hidden">
+<div class="group/design-root relative flex w-full flex-col overflow-hidden">
 	<div class="layout-container flex h-full grow flex-col overflow-y-auto">
 		<Header />
 		<div class="px-4 pt-4 lg:px-10 lg:pt-6">
