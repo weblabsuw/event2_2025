@@ -30,8 +30,9 @@
 	//    console.log(encodeMessage(successMsg, correctKey));
 	//
 	// 3. Copy the hex output and paste it below
-	const ENCODED_SUCCESS_MESSAGE = "baf0e6e700102c3a314818212530200353412f0345261b5432094e0723411f1c012e0a1a0b527305080748290b0c08452e16040010492e061101420c65280217051f2f011c4e4436190c171c22180c461228000a4f";
-	const SUCCESS_MESSAGE_HASH = "ebb5bfcb22eee677b43be085ad46f88111b56684204e93ab6e125f3a8594a439"
+	const REAL_MSG = "...";
+	const ENCODED_SUCCESS_MESSAGE = "baf0e6e700102c3a314818212530200353412c0143291a07004c434670181d1c016a0b0d1a45301900020d6b1906140e6b520e1b16002908110b185f002413130a182f0b480a4f240349350f2e001d462c2915130f0c41254f150b080c4439121106052f1d0d0a003a030a060126070707112e1c064e0156210b110b0f49002409131d532606060545374d01111a6b1a06462420170f1a44772d0d53164c484531151a4779403a18014e730b1c061c230b1b460c2906041c164f2f0e000c03420c7020150c1d3e4f210047210c0115056b1c0c1000261e040a4454200a54080358492604520b162206060a003b081b540b3907040349670100170d4e2f4f562c4c46552315520a1c3f030c0007274d1a0009250a49241024190800034829025432094e00310f0b491f25010f0b527d4d3d1c093f491a460b2806410b1245264f1c0c1f0c5235001e491d2b020d42002a021c540325011e47450f1b124e16452903540b0d414570080149313f0c03074e34050819481e404924042315041c48002e1d1b084c5f4f3d04521b12240b070300230108170d6b070746322e0102010a5321015a452d4a543513521e1b2b1b48064573090010483f01490b1c6714001a0c453a4354280d5e4b70281c0e012b0709030c7324491c092f4e1d09452a130a0b4448210254352d750e726b783e1a3e07481a48364d041b1c22180c46062b17001c4441260b54110449003304001d1223011c170027050800480a090c0811673b0f091641200e19450d4f54350552081f25010d4200110c0d2201290b1a460a3717130f10493e0a0745064d493c041649322d0a061a001a030e0609230f044603280041090b4f2c4154260342472200061c1f2b1b01014e204c";
+	const SUCCESS_MESSAGE_HASH = "32c68d55f5608e83daf8c571e3d46545e02ade07a993fd6f2dc81a7516a6565c";
 
 	/**
 	 * XOR decode using the answer key
@@ -60,6 +61,16 @@
 		}
 	}
 
+	async function hashAnswer(text: string): Promise<string> {
+		const encoder = new TextEncoder();
+		const data = encoder.encode(text);
+		const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+		const hashArray = Array.from(new Uint8Array(hashBuffer));
+		const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+
+		return hashHex;
+	}
+
 	/**
 	 * Handle form submission
 	 */
@@ -75,14 +86,14 @@
 
 		try {
 			// Concatenate answers to form the decryption key
-			const answerKey = murdererName + murderWeapon + murderLocation;
+			const answerKey = (murdererName + murderWeapon + murderLocation).trim()/*.toLowerCase()*/;
 
 			// Attempt to decode the success message
 			const decoded = decodeMessage(ENCODED_SUCCESS_MESSAGE, answerKey);
+			console.log(await hashAnswer(REAL_MSG));
 
 			// Compute hash of decoded message
-			const decodedHash = await computeHash(decoded);
-			console.log(decodedHash);
+			const decodedHash = await hashAnswer(decoded);
 
 			// Verify the hash matches the expected hash
 			if (decodedHash === SUCCESS_MESSAGE_HASH) {
@@ -333,6 +344,11 @@
 							<p class="font-pixel text-lg {resultSuccess ? 'text-primary' : 'text-spy-red'}">
 								{resultMessage}
 							</p>
+							{#if resultSuccess}
+								<p class="text-gray-400 italic">
+									Thank you for playing our little game! We hope you learned something. :-)
+								</p>
+							{/if}
 						</div>
 					{/if}
 				</div>
