@@ -249,13 +249,10 @@ async function handleMessage(msg, res) {
 						<p class="mb-2 font-bold text-primary">Required Tools (you must define):</p>
 						<ul class="list-disc space-y-1 text-xs">
 							<li class="ml-4">
-								<code class="code-inline">scan_environment</code> - Triggers drone's environmental scan (returns location data)
+								<code class="code-inline">scan_environment</code> - Triggers drone's environmental scan
 							</li>
 							<li class="ml-4">
-								<code class="code-inline">analyze_evidence</code> - Analyzes detected evidence samples (may require parameters)
-							</li>
-							<li class="ml-4">
-								<code class="code-inline">decode_sensor_data</code> - Decodes encrypted sensor readings (optional but helpful)
+								<code class="code-inline">analyze_evidence</code> - Analyzes detected evidence samples 
 							</li>
 						</ul>
 					</div>
