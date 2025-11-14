@@ -24,50 +24,90 @@
 	let editorView: EditorView | null = null;
 	let executing = $state(false);
 
-	const initialCode = `// Issue commands to Drone Unit 734
+	const initialCode = `// PART 1: Basic Communication (no tools)
+// PART 2: Advanced Analysis (with tools)
+
 async function handleMessage(msg, res) {
   // msg: the user's message
-  // res: function to call with your response
-  //      res(text) - send a text response
-  //      res.tool(name, args) - display a tool call
+  // res: function to send responses
+  //      res(text) - display text response
+  //      res.tool(name, args) - display tool call
 
-  // TODO: Define your tools
-  const tools = [
-    {
-      type: "function",
-      function: {
-        name: "scan_environment",
-        description: "Scan the drone's surroundings",
-        parameters: { type: "object", properties: {} }
-      }
-    }
-  ];
+  // ============================================
+  // PART 1: BASIC API CALL (DO THIS FIRST!)
+  // ============================================
+  // Goal: Get location data from the drone
+  // Try asking: "What is your status?"
 
-  // TODO: Make API call to /api/v1/ai/chat
   const response = await fetch("/api/v1/ai/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      messages: [{ role: "user", content: msg }],
-      tools: tools
+      messages: [{ role: "user", content: msg }]
+      // NOTE: No tools array yet for Part 1!
     })
   });
 
   const data = await response.json();
 
-  // TODO: Handle the response
-  // Check if there are tool calls: data.choices[0].message.tool_calls
-  // Or just text: data.choices[0].message.content
-
+  // Display text response
   if (data.choices[0].message.content) {
     res(data.choices[0].message.content);
+
+    // TODO: Extract and decode the hex string from the response
+    // Hint: Look for "LOCATION_SCAN: [hex]" in the text
+    // Use this function to decode hex:
+    // function hexToString(hex) {
+    //   let str = '';
+    //   for (let i = 0; i < hex.length; i += 2) {
+    //     str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    //   }
+    //   return str;
+    // }
   }
 
-  // Handle tool calls if present
-  if (data.choices[0].message.tool_calls) {
-    const toolCall = data.choices[0].message.tool_calls[0];
-    res.tool(toolCall.function.name, JSON.parse(toolCall.function.arguments));
+  // ============================================
+  // PART 2: TOOL CALLING (DO THIS SECOND!)
+  // ============================================
+  // Goal: Get weapon evidence using tools
+  // Try asking: "Analyze the evidence"
+
+  // TODO: Uncomment and modify this section for Part 2:
+  /*
+  const tools = [
+    {
+      type: "function",
+      function: {
+        name: "analyze_evidence",
+        description: "Analyze detected evidence at the crime scene",
+        parameters: { type: "object", properties: {} }
+      }
+    }
+  ];
+
+  const response2 = await fetch("/api/v1/ai/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      messages: [{ role: "user", content: msg }],
+      tools: tools  // Now include tools!
+    })
+  });
+
+  const data2 = await response2.json();
+
+  // Handle tool calls
+  if (data2.choices[0].message.tool_calls) {
+    const toolCall = data2.choices[0].message.tool_calls[0];
+    const args = JSON.parse(toolCall.function.arguments);
+
+    // Display the tool call
+    res.tool(toolCall.function.name, args);
+
+    // TODO: Decode the base64 encoded_data from args
+    // Hint: Use atob(args.encoded_data) to decode base64
   }
+  */
 }`;
 
 	function getCurrentTime(): string {
@@ -232,55 +272,93 @@ async function handleMessage(msg, res) {
 
 		<!-- Mission Briefing -->
 		<section class="space-y-6 px-4 py-6 lg:px-10">
+			<!-- Part 1 -->
 			<div class="rounded-lg border border-[#23482f] bg-[#0c1a10]/50 p-6">
-				<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // AUTONOMOUS WITNESS</h2>
+				<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // PART 1: BASIC COMMUNICATION</h2>
 				<div class="space-y-3 font-mono text-sm text-gray-300">
 					<p>
-						Agent Web was traveling with an autonomous reconnaissance drone (<b>DRONE_UNIT_734</b>) that remained intact at the crime scene. The drone's onboard AI system has advanced environmental sensors and a CSI analysis kit that detected critical evidence.
+						Agent Web was traveling with an autonomous reconnaissance drone (<b>DRONE_UNIT_734</b>) that remained intact at the crime scene. Your first task is to establish basic communication with the drone's AI system.
 					</p>
 					<p>
-						Due to <b>bandwidth encryption protocols</b>, all sensor data is stored in encoded formats. The drone will not reveal information directly — you must communicate through its <b>AI interface</b> and use its built-in tools to extract the encoded data.
-					</p>
-					<p>
-						<u>Your task</u>: Establish a connection with DRONE_UNIT_734's AI system and extract information about the crime scene location and evidence detected.
+						<u>Part 1 Goal</u>: Make a basic API call (without tools) and ask the drone about its location. The drone will respond with encoded location data that you must decode.
 					</p>
 
 					<div class="mt-4 rounded border border-[#23482f] bg-[#0c1a10] p-4">
-						<p class="mb-2 font-bold text-primary">Required Tools (you must define):</p>
-						<ul class="list-disc space-y-1 text-xs">
-							<li class="ml-4">
-								<code class="code-inline">scan_environment</code> - Triggers drone's environmental scan
-							</li>
-							<li class="ml-4">
-								<code class="code-inline">analyze_evidence</code> - Analyzes detected evidence samples 
-							</li>
-						</ul>
-					</div>
-
-					<div class="mt-4 rounded border border-[#23482f] bg-[#0c1a10] p-4">
-						<p class="mb-2 font-bold text-primary">Technical Details:</p>
+						<p class="mb-2 font-bold text-primary">Part 1 Requirements:</p>
 						<ul class="list-disc space-y-1 text-xs">
 							<li class="ml-4">
 								<b>API Endpoint:</b> <code class="code-inline">POST /api/v1/ai/chat</code>
 							</li>
 							<li class="ml-4">
-								<b>Request Format:</b> OpenAI-compatible (messages array + tools array)
+								<b>Request Body:</b> Include a <code class="code-inline">messages</code> array (just like ChatGPT API)
 							</li>
 							<li class="ml-4">
-								<b>Encoding Schemes:</b>
-								<ul class="ml-6 mt-1 list-disc space-y-0.5">
-									<li>Location data: Hexadecimal encoding</li>
-									<li>Sensor data: Base64 encoding</li>
-								</ul>
+								<b>DO NOT include tools yet</b> - this is a basic text conversation
 							</li>
 							<li class="ml-4">
-								<b>Response Type:</b> AI will return <code class="code-inline">tool_calls</code> - you must execute these functions client-side and decode the results
+								<b>Ask about location</b> - Try: "What is your status?" or "Where are you located?"
+							</li>
+							<li class="ml-4">
+								<b>Decode the response</b> - Location data will be in <b>hexadecimal</b> format
 							</li>
 						</ul>
 					</div>
 
 					<p class="mt-4 rounded border-l-4 border-primary bg-[#0c1a10] p-3 text-xs italic">
-						💡 <b>Tip:</b> The drone AI will not give you answers directly. Ask it questions like "What do you see?" or "Scan your surroundings" to trigger tool usage. Define the tools it needs, then decode the hex/base64 data it returns.
+						💡 <b>Hint:</b> The drone will include something like "LOCATION_SCAN: 57617265686F757365" in its response. You'll need to decode this hex string to plain text.
+					</p>
+				</div>
+			</div>
+
+			<!-- Part 2 -->
+			<div class="rounded-lg border border-[#23482f] bg-[#0c1a10]/50 p-6">
+				<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // PART 2: ADVANCED ANALYSIS (TOOL CALLING)</h2>
+				<div class="space-y-3 font-mono text-sm text-gray-300">
+					<p>
+						Now that you have basic communication, you need to access the drone's advanced analysis capabilities. The drone's CSI kit detected weapon evidence, but it can only reveal this data through its <b>tool interface</b>.
+					</p>
+					<p>
+						<u>Part 2 Goal</u>: Define a tool called <code class="code-inline">analyze_evidence</code> and make the AI call it to retrieve encoded weapon data.
+					</p>
+
+					<div class="mt-4 rounded border border-[#23482f] bg-[#0c1a10] p-4">
+						<p class="mb-2 font-bold text-primary">Part 2 Requirements:</p>
+						<ul class="list-disc space-y-1 text-xs">
+							<li class="ml-4">
+								<b>Add a tools array</b> to your API request
+							</li>
+							<li class="ml-4">
+								<b>Define tool:</b> <code class="code-inline">analyze_evidence</code> (no parameters needed)
+							</li>
+							<li class="ml-4">
+								<b>Tool description:</b> Something like "Analyze detected evidence at the crime scene"
+							</li>
+							<li class="ml-4">
+								<b>Ask about evidence:</b> "Analyze the evidence" or "What evidence did you detect?"
+							</li>
+							<li class="ml-4">
+								<b>Handle tool_calls:</b> The response will contain <code class="code-inline">tool_calls</code> instead of text
+							</li>
+							<li class="ml-4">
+								<b>Decode the data:</b> Weapon evidence will be in <b>Base64</b> format
+							</li>
+						</ul>
+					</div>
+
+					<div class="mt-4 rounded border border-[#23482f] bg-[#0c1a10] p-4">
+						<p class="mb-2 font-bold text-primary">Tool Schema Format:</p>
+						<pre class="text-xs text-gray-400 overflow-x-auto"><code>&#123;
+  type: "function",
+  function: &#123;
+    name: "analyze_evidence",
+    description: "Analyze detected evidence",
+    parameters: &#123; type: "object", properties: &#123;&#125; &#125;
+  &#125;
+&#125;</code></pre>
+					</div>
+
+					<p class="mt-4 rounded border-l-4 border-primary bg-[#0c1a10] p-3 text-xs italic">
+						💡 <b>Hint:</b> When the AI calls your tool, it will return arguments with an <code class="code-inline">encoded_data</code> field. Use <code class="code-inline">atob()</code> to decode Base64.
 					</p>
 				</div>
 			</div>
