@@ -155,7 +155,7 @@
 				<div class="animate-fadeIn">
 					<div class="mb-4 flex items-center justify-center gap-3">
 						<div class="h-px w-12 bg-primary"></div>
-						<span class="font-pixel text-sm text-primary">CLASSIFIED</span>
+						<span class="font-pixel text-2xl text-primary">CLASSIFIED</span>
 						<div class="h-px w-12 bg-primary"></div>
 					</div>
 
@@ -170,13 +170,20 @@
 						<p class="font-mono text-sm text-gray-400">
 							Last ping timestamp: <code class="code-inline">2025-10-08T20:37:00Z</code>
 						</p>
-						<p class="font-mono text-sm text-gray-400">
-							Your mission: Investigate three intelligence systems to uncover the truth behind his disappearance.
+						<p class="text-base gray-300">
+							You are a technical operative at <b>BadVibes</b>, a secretive international agency that tracks outbreaks of vibe coding
+							and infiltrates suspected organizations to contain the spread. Our network of agents are dispersed throughout
+							the world and operate completely undercover. Because of the nature of their work, our agents
+							only ping headquarters at specific checkpoint intervals. Recently, the transponder of one of our agents,
+							Buckingham Web, stopped sending signals. Our system logs lead us to believe there may have been foul play involved.
+						</p>
+						<p class="text-base gray-300">
+							<u>Your task</u>: Investigate three intelligence systems to uncover the truth behind his disappearance.
 						</p>
 					</div>
 
 					<div class="mt-8 rounded-lg border border-spy-red/30 bg-spy-red/5 p-4">
-						<p class="font-pixel text-s text-spy-red">
+						<p class="font-pixel text-lg text-spy-red">
 							⚠ SECURITY CLEARANCE REQUIRED ⚠
 						</p>
 						<p class="mt-2 font-mono text-s text-gray-400">
@@ -256,10 +263,10 @@
 			<!-- Footer hint -->
 			<section class="w-full max-w-4xl text-center">
 				<div class="rounded-lg border border-gray-700 bg-black/20 p-6">
-					<p class="font-pixel text-s text-gray-400">
+					<p class="font-pixel text-xl text-gray-400">
 						💡 ANALYST TIP
 					</p>
-					<p class="mt-2 font-mono text-s text-gray-500">
+					<p class="mt-2 font-mono text-s text-gray-200">
 						Complete all three missions to gather enough intelligence. Each mission provides crucial data that interconnects with the others. Cross-reference your findings to solve the mystery.
 					</p>
 				</div>
