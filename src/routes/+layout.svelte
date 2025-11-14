@@ -37,6 +37,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>Operation Weave</title>
 </svelte:head>
 
 {@render children?.()}
