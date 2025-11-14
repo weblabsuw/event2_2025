@@ -103,12 +103,12 @@
 			} else {
 				// Hash doesn't match - wrong answer
 				resultSuccess = false;
-				resultMessage = '❌ ACCESS DENIED: Incorrect answer. Review your evidence and try again.';
+				resultMessage = 'bad';
 			}
 		} catch (e) {
 			// Decoding or hashing failed
 			resultSuccess = false;
-			resultMessage = '❌ ACCESS DENIED: Incorrect answer. Review your evidence and try again.';
+			resultMessage = 'bad';
 		}
 
 		isSubmitting = false;
@@ -341,11 +341,14 @@
 					<!-- Result Message -->
 					{#if resultMessage}
 						<div class="mt-6 rounded-lg border-2 p-6 {resultSuccess ? 'border-primary bg-primary/10' : 'border-spy-red bg-spy-red/10'}">
-							<p class="font-pixel text-lg {resultSuccess ? 'text-primary' : 'text-spy-red'}">
-								{resultMessage}
-							</p>
+							<div class="font-pixel text-3xl tracking-wide {resultSuccess ? 'text-primary' : 'text-spy-red'}">
+								{resultSuccess ? '🎉  CASE SOLVED!' : '❌ ACCESS DENIED: Incorrect answer. Review your evidence and try again.'}
+							</div>
 							{#if resultSuccess}
-								<p class="text-gray-400 italic">
+								<p class="mt-3 text-base leading-relaxed text-gray-200">
+									{resultMessage}
+								</p>
+								<p class="mt-3 text-gray-400 italic">
 									Thank you for playing our little game! We hope you learned something. :-)
 								</p>
 							{/if}
