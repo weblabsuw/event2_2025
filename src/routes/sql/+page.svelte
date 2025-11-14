@@ -69,6 +69,19 @@
 	<div class="layout-container flex h-full grow flex-col">
 		<Header />
 		<main class="flex flex-1 flex-col items-center gap-8 p-4 lg:p-10">
+			<!-- Guide Link -->
+			<div class="w-full max-w-5xl">
+				<a
+					href="https://www.notion.so/tsuniiverse/Databases-2886e99d911280dc82b2c946bd872341?v=2636e99d91128199a2e9000c2bc0d841&source=copy_link#28d6e99d911280099989f03b53d7f3b3"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 font-pixel text-sm text-primary transition-colors hover:bg-primary/20"
+				>
+					<span>📖</span>
+					<span>SQL GUIDE</span>
+				</a>
+			</div>
+
 			<!-- Database Loading Error -->
 			{#if error}
 				<div class="w-full max-w-5xl rounded-lg border border-red-500/30 bg-red-950/20 p-4">
