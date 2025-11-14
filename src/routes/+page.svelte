@@ -1,38 +1,26 @@
 <script lang="ts">
 	import Header from '$lib/components/Header.svelte';
+	import { tick } from 'svelte';
 
 	// Form state
 	let murdererName = $state('');
-	let murderWeapon = $state('');
-	let murderLocation = $state('');
+	let murderWeaponType = $state('');
+	let murderWeaponManufacturer = $state('');
+	let murderLocationCity = $state('');
+	let murderLocationBuilding = $state('');
 	let isSubmitting = $state(false);
 	let resultMessage = $state('');
 	let resultSuccess = $state(false);
+	let resultDiv: HTMLElement;
 
-	// TODO: Replace this with your encoded success message
-	// To encode your message:
-	// 1. Determine the correct answer key: murdererName + murderWeapon + murderLocation
-	//    Example: "John SmithKnifeGrand Hotel, Paris"
-	// 2. Run this encoding function in Node.js or browser console:
-	//
-	//    function encodeMessage(message, key) {
-	//      const msgBytes = new TextEncoder().encode(message);
-	//      const keyBytes = new TextEncoder().encode(key);
-	//      const encoded = new Uint8Array(msgBytes.length);
-	//      for (let i = 0; i < msgBytes.length; i++) {
-	//        encoded[i] = msgBytes[i] ^ keyBytes[i % keyBytes.length];
-	//      }
-	//      return Array.from(encoded).map(b => b.toString(16).padStart(2, '0')).join('');
-	//    }
-	//
-	//    const correctKey = "John SmithKnifeGrand Hotel, Paris";
-	//    const successMsg = "🎉 CASE SOLVED! Agent Web's murderer has been identified. Excellent detective work!";
-	//    console.log(encodeMessage(successMsg, correctKey));
-	//
-	// 3. Copy the hex output and paste it below
-	const REAL_MSG = "...";
-	const ENCODED_SUCCESS_MESSAGE = "baf0e6e700102c3a314818212530200353412c0143291a07004c434670181d1c016a0b0d1a45301900020d6b1906140e6b520e1b16002908110b185f002413130a182f0b480a4f240349350f2e001d462c2915130f0c41254f150b080c4439121106052f1d0d0a003a030a060126070707112e1c064e0156210b110b0f49002409131d532606060545374d01111a6b1a06462420170f1a44772d0d53164c484531151a4779403a18014e730b1c061c230b1b460c2906041c164f2f0e000c03420c7020150c1d3e4f210047210c0115056b1c0c1000261e040a4454200a54080358492604520b162206060a003b081b540b3907040349670100170d4e2f4f562c4c46552315520a1c3f030c0007274d1a0009250a49241024190800034829025432094e00310f0b491f25010f0b527d4d3d1c093f491a460b2806410b1245264f1c0c1f0c5235001e491d2b020d42002a021c540325011e47450f1b124e16452903540b0d414570080149313f0c03074e34050819481e404924042315041c48002e1d1b084c5f4f3d04521b12240b070300230108170d6b070746322e0102010a5321015a452d4a543513521e1b2b1b48064573090010483f01490b1c6714001a0c453a4354280d5e4b70281c0e012b0709030c7324491c092f4e1d09452a130a0b4448210254352d750e726b783e1a3e07481a48364d041b1c22180c46062b17001c4441260b54110449003304001d1223011c170027050800480a090c0811673b0f091641200e19450d4f54350552081f25010d4200110c0d2201290b1a460a3717130f10493e0a0745064d493c041649322d0a061a001a030e0609230f044603280041090b4f2c4154260342472200061c1f2b1b01014e204c";
-	const SUCCESS_MESSAGE_HASH = "32c68d55f5608e83daf8c571e3d46545e02ade07a993fd6f2dc81a7516a6565c";
+	const ENCODED_SUCCESS_MESSAGE = "27080e00551a0b471d074818021b1755160a000a1b1d07180c471f1b140a404c4f14004d000a00000000571500040b04101745070e1e1c4f6d4700090d503d0b0a1f0048080347130f0c41090716161d19" +
+		"111d1d0d4e0707041a1d0b08020d54081c0a410813071016190217451c071407450f0807190a48000d020b50000a4d2c0645071a4725040a461e4e0110131b1c4172633b1e0609481213131804451352040f19001c061c1000060c0701595324" +
+		"040407064f654e0215181815084d1f04560c0f0b17054815050b4507170e07001600000949050d1c0f0f084c4804004d021f0c03115f5712131c01011253472a4103071c580006080c1c100b4a1941531d0f0916412a140e050c1b1507150258" +
+		"3e0b0c4906060d460d03024704004341390d0f005404411c0a1c4f1005000d41011b1c0c52000615501a0400084d00100112520a060e1a4f453d1b1c541d1d08024e0706051146081f4c6214110608030206151e57345c452a0e111400114d49" +
+		"130148000d025e0354031f020c001a010a17411a00030a0a18521f180e1b0c4e0707473f1d1502030253081c43412c031a110157161a041c4f1d164507080d521b4300081e591615110508130c492306000a4828030917141a0e194358204e06" +
+		"080348000941010d4b0452050800453e352a5943786f3f06011b4517090c520243540c111c501709080c1300080003521500044d050b1a0503110b1f0c4e1a01061c542706090254413b03061f0406151e570011110d0b5512090c0f0c5e4f6e" +
+		"410131101211164d0211451b0f131b170d124d1e10015207111d5808190f10470e1b14410b034f055c4d261f000f0053000e000e444f3414000d1547";
+	const SUCCESS_MESSAGE_HASH = "856e7887b01a3d27b2acf0ecbe1b0e2f3079ba926fddcd14af9c1dd59ab511ce";
 
 	/**
 	 * XOR decode using the answer key
@@ -82,15 +70,16 @@
 		resultSuccess = false;
 
 		// Simulate processing delay for effect
-		await new Promise(resolve => setTimeout(resolve, 1500));
+		await new Promise(resolve => setTimeout(resolve, 700));
+
+		resultMessage = 'Incorrect answer. Review your evidence and try again.';
 
 		try {
 			// Concatenate answers to form the decryption key
-			const answerKey = (murdererName + murderWeapon + murderLocation).trim()/*.toLowerCase()*/;
+			const answerKey = (murdererName + murderWeaponType + murderWeaponManufacturer + murderLocationBuilding + murderLocationCity).trim().toLowerCase();
 
 			// Attempt to decode the success message
 			const decoded = decodeMessage(ENCODED_SUCCESS_MESSAGE, answerKey);
-			console.log(await hashAnswer(REAL_MSG));
 
 			// Compute hash of decoded message
 			const decodedHash = await hashAnswer(decoded);
@@ -102,16 +91,16 @@
 				resultMessage = decoded;
 			} else {
 				// Hash doesn't match - wrong answer
-				resultSuccess = false;
-				resultMessage = 'bad';
 			}
 		} catch (e) {
 			// Decoding or hashing failed
-			resultSuccess = false;
-			resultMessage = 'bad';
 		}
 
 		isSubmitting = false;
+
+		// Wait for DOM to update before scrolling
+		await tick();
+		resultDiv?.scrollIntoView({ behavior: 'smooth', block: 'end' });
 	}
 
 	const missions = [
@@ -148,6 +137,7 @@
 	];
 
 	let hoveredMission = $state<string | null>(null);
+	let resultParagraphs = $derived(resultMessage ? resultMessage.split(/\r?\n\r?\n+/) : []);
 </script>
 
 <div class="group/design-root relative flex h-auto min-h-screen w-full flex-col overflow-hidden">
@@ -284,7 +274,7 @@
 						<div class="space-y-4">
 							<!-- Murderer Name -->
 							<div class="text-left">
-								<label for="murderer" class="mb-2 block font-pixel text-sm text-gray-300">
+								<label for="murderer" class="mb-2 block font-pixel text-lg text-gray-300">
 									MURDERER'S NAME (First Last)
 								</label>
 								<input
@@ -297,30 +287,60 @@
 								/>
 							</div>
 
-							<!-- Murder Weapon -->
+							<!-- Murder Weapon Type -->
 							<div class="text-left">
-								<label for="weapon" class="mb-2 block font-pixel text-sm text-gray-300">
-									MURDER WEAPON
+								<label for="weapon_type" class="mb-2 block font-pixel text-lg text-gray-300">
+									MURDER WEAPON TYPE
 								</label>
 								<input
-									id="weapon"
+									id="weapon_type"
 									type="text"
-									bind:value={murderWeapon}
+									bind:value={murderWeaponType}
 									placeholder="e.g., Knife"
 									class="w-full rounded-lg border border-gray-600 bg-black/40 px-4 py-3 font-mono text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
 									required
 								/>
 							</div>
 
-							<!-- Murder Location -->
+							<!-- Murder Weapon Manufacturer -->
 							<div class="text-left">
-								<label for="location" class="mb-2 block font-pixel text-sm text-gray-300">
-									MURDER LOCATION (Building, City)
+								<label for="weapon_manufacturer" class="mb-2 block font-pixel text-lg text-gray-300">
+									MURDER WEAPON MANUFACTURER
 								</label>
 								<input
-									id="location"
+									id="weapon_manufacturer"
 									type="text"
-									bind:value={murderLocation}
+									bind:value={murderWeaponManufacturer}
+									placeholder="e.g., Moonshade Security Corp"
+									class="w-full rounded-lg border border-gray-600 bg-black/40 px-4 py-3 font-mono text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
+									required
+								/>
+							</div>
+
+							<!-- Murder Location Building Type -->
+							<div class="text-left">
+								<label for="location_type" class="mb-2 block font-pixel text-lg text-gray-300">
+									MURDER LOCATION BUILDING TYPE
+								</label>
+								<input
+									id="location_type"
+									type="text"
+									bind:value={murderLocationBuilding}
+									placeholder="e.g., Shed"
+									class="w-full rounded-lg border border-gray-600 bg-black/40 px-4 py-3 font-mono text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
+									required
+								/>
+							</div>
+
+							<!-- Murder Location City -->
+							<div class="text-left">
+								<label for="location_city" class="mb-2 block font-pixel text-lg text-gray-300">
+									MURDER LOCATION CITY (City, Country)
+								</label>
+								<input
+									id="location_city"
+									type="text"
+									bind:value={murderLocationCity}
 									placeholder="e.g., Grand Hotel, Paris"
 									class="w-full rounded-lg border border-gray-600 bg-black/40 px-4 py-3 font-mono text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
 									required
@@ -340,14 +360,17 @@
 
 					<!-- Result Message -->
 					{#if resultMessage}
-						<div class="mt-6 rounded-lg border-2 p-6 {resultSuccess ? 'border-primary bg-primary/10' : 'border-spy-red bg-spy-red/10'}">
+						<div bind:this={resultDiv} class="mt-6 rounded-lg border-2 p-6 {resultSuccess ? 'border-primary bg-primary/10' : 'border-spy-red bg-spy-red/10'}">
 							<div class="font-pixel text-3xl tracking-wide {resultSuccess ? 'text-primary' : 'text-spy-red'}">
-								{resultSuccess ? '🎉  CASE SOLVED!' : '❌ ACCESS DENIED: Incorrect answer. Review your evidence and try again.'}
+								{resultSuccess ? '🎉 CASE SOLVED!' : '❌ ACCESS DENIED'}
+							</div>
+							<!-- Render paragraphs split by double newline; preserve single newlines -->
+							<div class="mt-3 space-y-4">
+								{#each resultParagraphs as para}
+									<p class="text-base leading-relaxed text-gray-200 whitespace-pre-wrap">{para}</p>
+								{/each}
 							</div>
 							{#if resultSuccess}
-								<p class="mt-3 text-base leading-relaxed text-gray-200">
-									{resultMessage}
-								</p>
 								<p class="mt-3 text-gray-400 italic">
 									Thank you for playing our little game! We hope you learned something. :-)
 								</p>
@@ -426,4 +449,3 @@
 		animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 	}
 </style>
-
