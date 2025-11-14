@@ -8,7 +8,7 @@
 	<div class="flex items-center text-white">
 		<a class="contents" href="/">
 			<div class="size-6 text-primary">
-				<img src={favicon} alt="logo">
+				<img src={favicon} alt="logo" height="24" width="24" />
 			</div>
 			<h2 class="font-display pl-2 text-lg leading-tight font-bold tracking-[-0.015em] text-white hover:text-primary transition-colors">
 				OPERATION WEAVE
