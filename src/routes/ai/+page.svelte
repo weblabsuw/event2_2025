@@ -216,7 +216,7 @@ async function handleMessage(msg, res) {
 </script>
 
 <div class="group/design-root relative flex h-screen w-full flex-col overflow-hidden">
-	<div class="layout-container flex h-full grow flex-col">
+	<div class="layout-container flex h-full grow flex-col overflow-y-auto">
 		<Header />
 		<div class="px-4 pt-4 lg:px-10 lg:pt-6">
 			<a
@@ -229,6 +229,66 @@ async function handleMessage(msg, res) {
 				<span>AI FUNCTION CALLING GUIDE</span>
 			</a>
 		</div>
+
+		<!-- Mission Briefing -->
+		<section class="space-y-6 px-4 py-6 lg:px-10">
+			<div class="rounded-lg border border-[#23482f] bg-[#0c1a10]/50 p-6">
+				<h2 class="mb-4 font-pixel text-xl text-primary">MISSION BRIEFING // AUTONOMOUS WITNESS</h2>
+				<div class="space-y-3 font-mono text-sm text-gray-300">
+					<p>
+						Agent Web was traveling with an autonomous reconnaissance drone (<b>DRONE_UNIT_734</b>) that remained intact at the crime scene. The drone's onboard AI system has advanced environmental sensors and a CSI analysis kit that detected critical evidence.
+					</p>
+					<p>
+						Due to <b>bandwidth encryption protocols</b>, all sensor data is stored in encoded formats. The drone will not reveal information directly — you must communicate through its <b>AI interface</b> and use its built-in tools to extract the encoded data.
+					</p>
+					<p>
+						<u>Your task</u>: Establish a connection with DRONE_UNIT_734's AI system and extract information about the crime scene location and evidence detected.
+					</p>
+
+					<div class="mt-4 rounded border border-[#23482f] bg-[#0c1a10] p-4">
+						<p class="mb-2 font-bold text-primary">Required Tools (you must define):</p>
+						<ul class="list-disc space-y-1 text-xs">
+							<li class="ml-4">
+								<code class="code-inline">scan_environment</code> - Triggers drone's environmental scan (returns location data)
+							</li>
+							<li class="ml-4">
+								<code class="code-inline">analyze_evidence</code> - Analyzes detected evidence samples (may require parameters)
+							</li>
+							<li class="ml-4">
+								<code class="code-inline">decode_sensor_data</code> - Decodes encrypted sensor readings (optional but helpful)
+							</li>
+						</ul>
+					</div>
+
+					<div class="mt-4 rounded border border-[#23482f] bg-[#0c1a10] p-4">
+						<p class="mb-2 font-bold text-primary">Technical Details:</p>
+						<ul class="list-disc space-y-1 text-xs">
+							<li class="ml-4">
+								<b>API Endpoint:</b> <code class="code-inline">POST /api/v1/ai/chat</code>
+							</li>
+							<li class="ml-4">
+								<b>Request Format:</b> OpenAI-compatible (messages array + tools array)
+							</li>
+							<li class="ml-4">
+								<b>Encoding Schemes:</b>
+								<ul class="ml-6 mt-1 list-disc space-y-0.5">
+									<li>Location data: Hexadecimal encoding</li>
+									<li>Sensor data: Base64 encoding</li>
+								</ul>
+							</li>
+							<li class="ml-4">
+								<b>Response Type:</b> AI will return <code class="code-inline">tool_calls</code> - you must execute these functions client-side and decode the results
+							</li>
+						</ul>
+					</div>
+
+					<p class="mt-4 rounded border-l-4 border-primary bg-[#0c1a10] p-3 text-xs italic">
+						💡 <b>Tip:</b> The drone AI will not give you answers directly. Ask it questions like "What do you see?" or "Scan your surroundings" to trigger tool usage. Define the tools it needs, then decode the hex/base64 data it returns.
+					</p>
+				</div>
+			</div>
+		</section>
+
 		<main class="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-hidden p-4 lg:grid-cols-2 lg:p-10">
 			<!-- Chat Interface -->
 			<div
