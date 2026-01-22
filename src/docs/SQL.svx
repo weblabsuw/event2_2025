@@ -1,0 +1,486 @@
+# SQL Guide - Querying Databases with SQLite
+
+This guide teaches you the fundamentals of SQL (Structured Query Language) for querying databases. These skills are essential for solving the SQL station challenges.
+
+## Table of Contents
+1. [What is SQL?](#what-is-sql)
+2. [Basic SELECT Queries](#basic-select-queries)
+3. [Filtering with WHERE](#filtering-with-where)
+4. [Sorting and Limiting](#sorting-and-limiting)
+5. [Combining Tables with JOIN](#combining-tables-with-join)
+6. [Aggregation and Grouping](#aggregation-and-grouping)
+7. [Practical Examples](#practical-examples)
+
+---
+
+## What is SQL?
+
+SQL (Structured Query Language) is a language designed for managing and querying data stored in relational databases. Think of a database as a collection of spreadsheets (called **tables**), where each table has:
+- **Columns** - The different types of data (like name, date, location)
+- **Rows** - Individual records (each entry in the table)
+
+### SQLite
+
+SQLite is a lightweight database that stores all data in a single file. It's perfect for applications that need a simple, embedded database without running a separate server.
+
+### Basic Terminology
+
+| Term | Description |
+|------|-------------|
+| **Table** | A collection of related data organized in rows and columns |
+| **Column** | A field in a table (like "name" or "date") |
+| **Row** | A single record in a table |
+| **Query** | A request for data from the database |
+| **Primary Key** | A unique identifier for each row |
+| **Foreign Key** | A column that references a primary key in another table |
+
+---
+
+## Basic SELECT Queries
+
+The `SELECT` statement is how you retrieve data from a database.
+
+### Selecting All Columns
+
+```sql
+SELECT * FROM agents;
+```
+
+The `*` means "all columns". This query returns every column and every row from the `agents` table.
+
+### Selecting Specific Columns
+
+```sql
+SELECT name, codename FROM agents;
+```
+
+Only returns the `name` and `codename` columns, making the output cleaner and faster.
+
+### Column Aliases
+
+Rename columns in your output using `AS`:
+
+```sql
+SELECT name AS agent_name, codename AS alias FROM agents;
+```
+
+---
+
+## Filtering with WHERE
+
+The `WHERE` clause filters rows based on conditions.
+
+### Basic Comparisons
+
+```sql
+-- Exact match
+SELECT * FROM agents WHERE status = 'active';
+
+-- Not equal
+SELECT * FROM agents WHERE status != 'inactive';
+
+-- Numeric comparison
+SELECT * FROM flights WHERE duration > 180;
+
+-- Greater than or equal
+SELECT * FROM locations WHERE timestamp >= '2025-01-01';
+```
+
+### Multiple Conditions
+
+Combine conditions with `AND` and `OR`:
+
+```sql
+-- Both conditions must be true
+SELECT * FROM agents
+WHERE status = 'active' AND clearance_level >= 5;
+
+-- Either condition can be true
+SELECT * FROM flights
+WHERE origin = 'NYC' OR destination = 'NYC';
+
+-- Complex combinations (use parentheses for clarity)
+SELECT * FROM agents
+WHERE (status = 'active' OR status = 'undercover')
+  AND clearance_level >= 3;
+```
+
+### Pattern Matching with LIKE
+
+Use `LIKE` for partial text matching:
+
+```sql
+-- Starts with "John"
+SELECT * FROM agents WHERE name LIKE 'John%';
+
+-- Ends with "son"
+SELECT * FROM agents WHERE name LIKE '%son';
+
+-- Contains "mission"
+SELECT * FROM logs WHERE description LIKE '%mission%';
+```
+
+- `%` matches any sequence of characters
+- `_` matches exactly one character
+
+### Checking for NULL
+
+NULL represents missing or unknown data. Use `IS NULL` or `IS NOT NULL`:
+
+```sql
+-- Find agents without an assigned handler
+SELECT * FROM agents WHERE handler_id IS NULL;
+
+-- Find agents with assigned handlers
+SELECT * FROM agents WHERE handler_id IS NOT NULL;
+```
+
+### IN Operator
+
+Check if a value is in a list:
+
+```sql
+SELECT * FROM flights
+WHERE destination IN ('NYC', 'LAX', 'ORD');
+```
+
+### BETWEEN Operator
+
+Check if a value is within a range:
+
+```sql
+SELECT * FROM logs
+WHERE timestamp BETWEEN '2025-01-01' AND '2025-01-31';
+```
+
+---
+
+## Sorting and Limiting
+
+### ORDER BY
+
+Sort results by one or more columns:
+
+```sql
+-- Ascending order (default)
+SELECT * FROM agents ORDER BY name;
+
+-- Descending order
+SELECT * FROM flights ORDER BY departure_time DESC;
+
+-- Multiple columns
+SELECT * FROM logs ORDER BY agent_id, timestamp DESC;
+```
+
+### LIMIT
+
+Restrict the number of results:
+
+```sql
+-- Get only the first 10 rows
+SELECT * FROM flights LIMIT 10;
+
+-- Skip first 5 rows, then get next 10
+SELECT * FROM flights LIMIT 10 OFFSET 5;
+```
+
+### Combining ORDER BY and LIMIT
+
+Find the most recent events:
+
+```sql
+-- Get the 5 most recent log entries
+SELECT * FROM logs
+ORDER BY timestamp DESC
+LIMIT 5;
+```
+
+---
+
+## Combining Tables with JOIN
+
+JOINs connect data from multiple tables based on related columns. This is one of the most powerful features of SQL.
+
+### Understanding Relationships
+
+Tables are often related through shared columns:
+- An `agents` table might have an `id` column
+- A `flights` table might have an `agent_id` column that references `agents.id`
+
+### INNER JOIN
+
+Returns only rows where there's a match in both tables:
+
+```sql
+SELECT agents.name, flights.destination, flights.departure_time
+FROM agents
+INNER JOIN flights ON agents.id = flights.agent_id;
+```
+
+This query:
+1. Looks at each agent
+2. Finds all their flights (where `agent_id` matches)
+3. Returns combined data from both tables
+
+### Simplified JOIN Syntax
+
+`INNER JOIN` can be written as just `JOIN`:
+
+```sql
+SELECT agents.name, flights.destination
+FROM agents
+JOIN flights ON agents.id = flights.agent_id;
+```
+
+### Table Aliases
+
+Make queries shorter with aliases:
+
+```sql
+SELECT a.name, f.destination, f.departure_time
+FROM agents a
+JOIN flights f ON a.id = f.agent_id;
+```
+
+### LEFT JOIN
+
+Returns all rows from the left table, even if there's no match:
+
+```sql
+SELECT agents.name, flights.destination
+FROM agents
+LEFT JOIN flights ON agents.id = flights.agent_id;
+```
+
+Agents without any flights will still appear, with NULL for flight columns.
+
+### Multiple JOINs
+
+Chain multiple JOINs to connect several tables:
+
+```sql
+SELECT a.name, f.flight_number, l.city
+FROM agents a
+JOIN flights f ON a.id = f.agent_id
+JOIN locations l ON f.destination_code = l.code;
+```
+
+### JOIN with WHERE
+
+Filter joined results:
+
+```sql
+SELECT a.name, f.destination
+FROM agents a
+JOIN flights f ON a.id = f.agent_id
+WHERE f.departure_time > '2025-01-15'
+  AND a.status = 'active';
+```
+
+---
+
+## Aggregation and Grouping
+
+### Aggregate Functions
+
+Perform calculations on sets of rows:
+
+| Function | Description |
+|----------|-------------|
+| `COUNT()` | Number of rows |
+| `SUM()` | Total of numeric values |
+| `AVG()` | Average of numeric values |
+| `MIN()` | Smallest value |
+| `MAX()` | Largest value |
+
+```sql
+-- Count all agents
+SELECT COUNT(*) FROM agents;
+
+-- Count active agents
+SELECT COUNT(*) FROM agents WHERE status = 'active';
+
+-- Average flight duration
+SELECT AVG(duration) FROM flights;
+
+-- Find the longest flight
+SELECT MAX(duration) FROM flights;
+```
+
+### GROUP BY
+
+Group rows that share a value and aggregate each group:
+
+```sql
+-- Count agents by status
+SELECT status, COUNT(*) as count
+FROM agents
+GROUP BY status;
+
+-- Total flight hours per agent
+SELECT agent_id, SUM(duration) as total_hours
+FROM flights
+GROUP BY agent_id;
+```
+
+### HAVING
+
+Filter groups (like WHERE but for aggregated data):
+
+```sql
+-- Find agents with more than 5 flights
+SELECT agent_id, COUNT(*) as flight_count
+FROM flights
+GROUP BY agent_id
+HAVING COUNT(*) > 5;
+```
+
+---
+
+## Practical Examples
+
+### Example 1: Find Where Someone Was at a Specific Time
+
+```sql
+SELECT l.city, l.building, l.timestamp
+FROM agents a
+JOIN locations l ON a.id = l.agent_id
+WHERE a.name = 'John Smith'
+  AND l.timestamp BETWEEN '2025-01-15 00:00:00' AND '2025-01-15 23:59:59'
+ORDER BY l.timestamp;
+```
+
+### Example 2: Find All Flights to a Destination
+
+```sql
+SELECT a.name, f.flight_number, f.departure_time
+FROM agents a
+JOIN flights f ON a.id = f.agent_id
+WHERE f.destination = 'NYC'
+ORDER BY f.departure_time DESC;
+```
+
+### Example 3: Find Agents in the Same Location
+
+```sql
+SELECT DISTINCT a.name, l.city, l.timestamp
+FROM agents a
+JOIN locations l ON a.id = l.agent_id
+WHERE l.city = 'New York'
+  AND l.timestamp >= '2025-01-15'
+ORDER BY l.timestamp;
+```
+
+### Example 4: Cross-Reference Two Data Sources
+
+```sql
+-- Find agents who were in NYC when a specific flight arrived
+SELECT DISTINCT a.name, a.codename
+FROM agents a
+JOIN locations l ON a.id = l.agent_id
+JOIN flights f ON a.id = f.agent_id
+WHERE l.city = 'New York'
+  AND f.destination = 'NYC'
+  AND l.timestamp BETWEEN f.arrival_time AND datetime(f.arrival_time, '+2 hours');
+```
+
+### Example 5: Find the Most Frequent Travelers
+
+```sql
+SELECT a.name, COUNT(f.id) as flight_count
+FROM agents a
+JOIN flights f ON a.id = f.agent_id
+GROUP BY a.id
+ORDER BY flight_count DESC
+LIMIT 10;
+```
+
+---
+
+## Tips & Best Practices
+
+1. **Start simple** - Build queries incrementally. Start with SELECT *, then add WHERE, then JOIN
+2. **Use table aliases** - Makes complex queries more readable (`a` for agents, `f` for flights)
+3. **Check your JOINs** - Make sure you're matching the right columns
+4. **Test with LIMIT** - Add `LIMIT 10` while testing to avoid huge result sets
+5. **Read error messages** - SQL errors usually tell you exactly what's wrong
+6. **Mind your quotes** - Use single quotes for strings (`'value'`), not double quotes
+
+---
+
+## Common Pitfalls
+
+❌ **Forgetting quotes around strings**
+```sql
+SELECT * FROM agents WHERE name = John;  -- Error!
+```
+
+✅ **Correct**
+```sql
+SELECT * FROM agents WHERE name = 'John';
+```
+
+---
+
+❌ **Using = for NULL comparison**
+```sql
+SELECT * FROM agents WHERE handler_id = NULL;  -- Won't work!
+```
+
+✅ **Correct**
+```sql
+SELECT * FROM agents WHERE handler_id IS NULL;
+```
+
+---
+
+❌ **Ambiguous column names in JOINs**
+```sql
+SELECT name, city FROM agents JOIN locations ON id = agent_id;  -- Which id?
+```
+
+✅ **Correct**
+```sql
+SELECT a.name, l.city FROM agents a JOIN locations l ON a.id = l.agent_id;
+```
+
+---
+
+## Quick Reference
+
+```sql
+-- Basic query structure
+SELECT columns
+FROM table
+WHERE conditions
+ORDER BY column
+LIMIT number;
+
+-- JOIN structure
+SELECT columns
+FROM table1
+JOIN table2 ON table1.column = table2.column
+WHERE conditions;
+
+-- Aggregation structure
+SELECT column, COUNT(*)
+FROM table
+GROUP BY column
+HAVING COUNT(*) > value;
+
+-- Common operators
+=, !=, <, >, <=, >=      -- Comparison
+AND, OR, NOT              -- Logical
+LIKE '%pattern%'          -- Pattern matching
+IN (value1, value2)       -- List membership
+BETWEEN val1 AND val2     -- Range
+IS NULL, IS NOT NULL      -- NULL checks
+```
+
+---
+
+## Resources
+
+- [SQLite Documentation](https://www.sqlite.org/docs.html)
+- [SQL Tutorial - W3Schools](https://www.w3schools.com/sql/)
+- [SQLite Tutorial](https://www.sqlitetutorial.net/)
