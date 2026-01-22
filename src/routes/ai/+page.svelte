@@ -260,7 +260,7 @@ async function handleMessage(msg, res) {
 		<Header />
 		<div class="px-4 pt-4 lg:px-10 lg:pt-6">
 			<a
-				href="/AI.pdf"
+				href="/ai/docs"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 font-pixel text-sm text-primary transition-colors hover:bg-primary/20"

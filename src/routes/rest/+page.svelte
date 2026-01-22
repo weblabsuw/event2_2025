@@ -11,7 +11,7 @@
 			<!-- Guide Link -->
 			<div class="w-full max-w-7xl">
 				<a
-					href="/REST.pdf"
+					href="/rest/docs"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 font-pixel text-sm text-primary transition-colors hover:bg-primary/20"

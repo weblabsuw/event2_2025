@@ -72,7 +72,7 @@
 			<!-- Guide Link -->
 			<div class="w-full max-w-5xl">
 				<a
-					href="https://www.notion.so/tsuniiverse/Databases-2886e99d911280dc82b2c946bd872341?v=2636e99d91128199a2e9000c2bc0d841&source=copy_link#28d6e99d911280099989f03b53d7f3b3"
+					href="/sql/docs"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 font-pixel text-sm text-primary transition-colors hover:bg-primary/20"
