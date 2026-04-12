@@ -4,6 +4,10 @@
 	import { javascript } from '@codemirror/lang-javascript';
 	import { abcdef } from '@fsegurai/codemirror-theme-abcdef';
 	import Header from '$lib/components/Header.svelte';
+	import DocsSidebar from '$lib/components/DocsSidebar.svelte';
+	import AI from '../../docs/AI.svx';
+
+	let sidebarOpen = $state(false);
 
 	type Message = {
 		sender: 'drone' | 'agent';
@@ -259,15 +263,13 @@ async function handleMessage(msg, res) {
 	<div class="layout-container flex h-full grow flex-col overflow-y-auto">
 		<Header />
 		<div class="px-4 pt-4 lg:px-10 lg:pt-6">
-			<a
-				href="/AI.pdf"
-				target="_blank"
-				rel="noopener noreferrer"
+			<button
+				onclick={() => (sidebarOpen = true)}
 				class="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 font-pixel text-sm text-primary transition-colors hover:bg-primary/20"
 			>
 				<span>📖</span>
 				<span>AI FUNCTION CALLING GUIDE</span>
-			</a>
+			</button>
 		</div>
 
 		<!-- Mission Briefing -->
@@ -489,6 +491,10 @@ async function handleMessage(msg, res) {
 		</main>
 	</div>
 </div>
+
+<DocsSidebar open={sidebarOpen} onclose={() => (sidebarOpen = false)} title="AI FUNCTION CALLING GUIDE" docsHref="/ai/docs">
+	<AI />
+</DocsSidebar>
 
 <style>
 	:global(.cm-editor) {

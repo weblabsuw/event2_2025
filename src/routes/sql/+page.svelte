@@ -3,6 +3,8 @@
 	import initSqlJs, { type Database } from 'sql.js';
 	import Header from '$lib/components/Header.svelte';
 	import SqlTerminal from '$lib/components/SqlTerminal.svelte';
+	import DocsSidebar from '$lib/components/DocsSidebar.svelte';
+	import SQL from '../../docs/SQL.svx';
 
 	let db = $state<Database | null>(null);
 	let error = $state<string | null>(null);
@@ -10,6 +12,7 @@
 	let part2Solved = $state(false);
 	let part2Element: HTMLElement;
 	let successElement: HTMLElement;
+	let sidebarOpen = $state(false);
 
 	const PART1_ANSWER_HASH = 'E05DB9B6C2E45A34D0C63617C91F950E28FF4D2326E63AA10A91E86CDE2E2802'.toLowerCase();
 	const PART2_ANSWER_HASH = '234D28249B180616D49E22FD57F26EE1ABE04B63565812D65470FF881E854683'.toLowerCase();
@@ -71,15 +74,13 @@
 		<main class="flex flex-1 flex-col items-center gap-8 p-4 lg:p-10">
 			<!-- Guide Link -->
 			<div class="w-full max-w-5xl">
-				<a
-					href="https://www.notion.so/tsuniiverse/Databases-2886e99d911280dc82b2c946bd872341?v=2636e99d91128199a2e9000c2bc0d841&source=copy_link#28d6e99d911280099989f03b53d7f3b3"
-					target="_blank"
-					rel="noopener noreferrer"
+				<button
+					onclick={() => (sidebarOpen = true)}
 					class="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 font-pixel text-sm text-primary transition-colors hover:bg-primary/20"
 				>
 					<span>📖</span>
 					<span>SQL GUIDE</span>
-				</a>
+				</button>
 			</div>
 
 			<!-- Database Loading Error -->
@@ -194,6 +195,10 @@
 		</main>
 	</div>
 </div>
+
+<DocsSidebar open={sidebarOpen} onclose={() => (sidebarOpen = false)} title="SQL GUIDE" docsHref="/sql/docs">
+	<SQL />
+</DocsSidebar>
 
 <style>
 	@keyframes fadeIn {

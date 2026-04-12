@@ -168,7 +168,7 @@
 							<span class="text-spy-red">AGENT BUCKINGHAM WEB</span> has gone dark.
 						</p>
 						<p class="font-mono text-sm text-gray-400">
-							Last ping timestamp: <code class="code-inline">2025-10-08T20:37:00Z</code>
+							Last ping timestamp: <code class="code-inline">2026-04-12T20:37:00Z</code>
 						</p>
 						<p class="text-base gray-300">
 							You are a technical operative at <b>BadVibes</b>, a secretive international agency that tracks outbreaks of vibe coding

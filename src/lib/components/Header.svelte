@@ -15,24 +15,51 @@
 			</h2>
 		</a>
 	</div>
-	<nav class="flex items-center gap-6">
-		<a
-			href="/sql"
-			class="font-pixel text-lg font-medium text-white hover:text-primary transition-colors"
-		>
-			SQL
-		</a>
-		<a
-			href="/rest"
-			class="font-pixel text-lg font-medium text-white hover:text-primary transition-colors"
-		>
-			REST
-		</a>
-		<a
-			href="/ai"
-			class="font-pixel text-lg font-medium text-white hover:text-primary transition-colors"
-		>
-			AI
-		</a>
+	<nav class="flex items-center gap-4 md:gap-6">
+		<div class="flex items-center gap-1">
+			<a
+				href="/sql"
+				class="font-pixel text-lg font-medium text-white hover:text-primary transition-colors"
+			>
+				SQL
+			</a>
+			<span class="text-gray-600">|</span>
+			<a
+				href="/sql/docs"
+				class="text-xs text-gray-400 hover:text-primary transition-colors"
+			>
+				Guide
+			</a>
+		</div>
+		<div class="flex items-center gap-1">
+			<a
+				href="/rest"
+				class="font-pixel text-lg font-medium text-white hover:text-primary transition-colors"
+			>
+				REST
+			</a>
+			<span class="text-gray-600">|</span>
+			<a
+				href="/rest/docs"
+				class="text-xs text-gray-400 hover:text-primary transition-colors"
+			>
+				Guide
+			</a>
+		</div>
+		<div class="flex items-center gap-1">
+			<a
+				href="/ai"
+				class="font-pixel text-lg font-medium text-white hover:text-primary transition-colors"
+			>
+				AI
+			</a>
+			<span class="text-gray-600">|</span>
+			<a
+				href="/ai/docs"
+				class="text-xs text-gray-400 hover:text-primary transition-colors"
+			>
+				Guide
+			</a>
+		</div>
 	</nav>
 </header>
