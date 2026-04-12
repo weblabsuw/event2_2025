@@ -2,6 +2,10 @@
 	import RestClient from '$lib/components/RestClient.svelte';
 	import CodeEditor from '$lib/components/CodeEditor.svelte';
 	import Header from '$lib/components/Header.svelte';
+	import DocsSidebar from '$lib/components/DocsSidebar.svelte';
+	import REST from '../../docs/REST.svx';
+
+	let sidebarOpen = $state(false);
 </script>
 
 <div class="group/design-root relative flex h-auto min-h-screen w-full flex-col overflow-hidden">
@@ -10,15 +14,13 @@
 		<main class="flex flex-1 flex-col items-center gap-8 p-4 lg:p-10">
 			<!-- Guide Link -->
 			<div class="w-full max-w-7xl">
-				<a
-					href="/rest/docs"
-					target="_blank"
-					rel="noopener noreferrer"
+				<button
+					onclick={() => (sidebarOpen = true)}
 					class="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 font-pixel text-sm text-primary transition-colors hover:bg-primary/20"
 				>
 					<span>📖</span>
 					<span>REST API GUIDE</span>
-				</a>
+				</button>
 			</div>
 
 			<!-- Mission Briefing -->
@@ -74,3 +76,7 @@
 		</main>
 	</div>
 </div>
+
+<DocsSidebar open={sidebarOpen} onclose={() => (sidebarOpen = false)} title="REST API GUIDE" docsHref="/rest/docs">
+	<REST />
+</DocsSidebar>
