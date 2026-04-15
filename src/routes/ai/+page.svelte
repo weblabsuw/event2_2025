@@ -369,7 +369,7 @@ async function handleMessage(msg, res) {
 		<main class="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-hidden p-4 lg:grid-cols-2 lg:p-10">
 			<!-- Chat Interface -->
 			<div
-				class="@container flex min-h-[600px] flex-col overflow-hidden rounded-lg border border-[#23482f] lg:min-h-0"
+				class="@container flex min-h-[600px] max-h-screen flex-col overflow-hidden rounded-lg border border-[#23482f] lg:min-h-0"
 			>
 				<div class="flex items-center justify-between border-b border-solid border-[#23482f] px-4 py-2">
 					<h3 class="font-pixel text-lg leading-tight font-bold tracking-[-0.015em] text-primary">
@@ -467,7 +467,7 @@ async function handleMessage(msg, res) {
 
 			<!-- Code Editor -->
 			<div
-				class="flex min-h-[600px] flex-col overflow-hidden rounded-lg border border-[#23482f] lg:min-h-0"
+				class="flex min-h-[600px] max-h-screen flex-col overflow-hidden rounded-lg border border-[#23482f] lg:min-h-0"
 			>
 				<div class="flex items-center border-b border-solid border-[#23482f] px-4 py-2">
 					<h3 class="font-pixel text-lg leading-tight font-bold tracking-[-0.015em] text-primary">
