@@ -19,6 +19,10 @@ SQL (Structured Query Language) is a language designed for managing and querying
 - **Columns** - The different types of data (like name, date, location)
 - **Rows** - Individual records (each entry in the table)
 
+Here's how the pieces of a SQL query fit together:
+
+![SQL query pipeline diagram showing JOIN, WHERE, GROUP BY, AGGREGATE, HAVING, ORDER BY, LIMIT, and Result stages](/sql_infographic.png)
+
 ### SQLite
 
 SQLite is a lightweight database that stores all data in a single file. It's perfect for applications that need a simple, embedded database without running a separate server.
